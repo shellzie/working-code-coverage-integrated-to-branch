@@ -1,0 +1,13 @@
+<div class="comparison-chart comp-chart-persist-area column-size-is-<%= component.column_size %>">
+  <section <%= component.is_enable_sticky_header %>>
+    <div class="comp-chart-header-container">
+      <div class="comp-chart-text-header">
+        <%= render_child_component_if_exists_with_name(component, "cq-comp-chart-text-header") %>
+      </div>
+      <div class="comp-chart-table-header">
+        <%= render_child_component_if_exists_with_name(component, "cq-comp-chart-header-container") %>
+      </div>
+    </div>
+  </section>
+  <%= component.table_data.gsub(/✓/, '<span class="checkmark"></span>').html_safe %>
+</div>

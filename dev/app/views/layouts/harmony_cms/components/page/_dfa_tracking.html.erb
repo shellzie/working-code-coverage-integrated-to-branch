@@ -1,0 +1,13 @@
+<iframe src="" width="1" height="1" frameborder="0" style="display:none" id="dfaFrame"> </iframe>
+<script>
+    var url                 = "<%= component.dfa_tagserver %>";
+		var dfa_type            = "<%= component.dfa_type %>";
+		var dfa_optional_params = "<%= component.dfa_optional_params%>";
+    var dfa_ord             = "<%= component.dfa_ord %>";
+    var dfa_cat             = "<%= component.dfa_cat %>";
+		var rnd =  new Date().getTime();
+		ord = (dfa_ord)? (dfa_ord) : '1';
+		param_string = (dfa_optional_params)? dfa_optional_params + ';' : '';
+		url += "type=" + dfa_type + ";cat=" + dfa_cat + ";" + param_string  + "ord=" + dfa_ord + ";num=" + rnd + "?";
+		document.getElementById('dfaFrame').src = url;
+</script>

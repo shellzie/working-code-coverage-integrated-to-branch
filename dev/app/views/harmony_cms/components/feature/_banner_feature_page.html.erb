@@ -1,0 +1,13 @@
+<section class="cbanner-feature-page">
+    <span class="span11 offset1">
+    <div class="banner-text span7">
+        <h3><%= component.banner_text %></h3>
+    </div>
+    <div class="cta_container">
+		<%= render_child_component_with_name(component, "banner_cta_a") %>
+    </div>
+    </span>
+	<span class="banner-text2 offset1 span11">
+		<%= render_child_component_with_name(component, "cq-text") %>
+    </span>
+</section>

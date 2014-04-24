@@ -1,0 +1,14 @@
+<section id="main">
+  <div class="outer-container cseo">
+    <div class="content-container">
+      <%= render_child_component_if_exists_with_name(component, "cq-headings") %>
+    </div>
+    <div class="chero-lt-just">
+      <%= render_child_component_if_exists_with_name(component, "cq-hero") %>
+    </div>
+    <div class="content-container">
+      <%= render_child_component_if_exists_with_name(component, "cq-container") %>
+    </div>
+    <%= render_child_component_if_exists_with_name(component, "cq-disclosure")  %>
+  </div>
+</section>

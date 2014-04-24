@@ -1,0 +1,20 @@
+<section class="ctabs">
+    <ul class="tabs">
+        <% (1..component.tab_text.length).each do |i| %>
+        <%  tabpath="tab_text_#{i}"   %>
+        <% tabsc="tracking_tab_#{i}" %>
+        <%  sactive = (component.active_tab.eql?("#{i}")) ? " active " : ""  %>
+        <%  short_lineheight = (component.tab_text[tabpath].length() > 22) ? " short_lineheight " : "" %>
+          <li id="ctabs_<%=i%>" class="p3 <%=sactive%> <%=short_lineheight%>  <%= component.stabclass %>" tabindex="0" <%= component.tab_sc[tabsc] %>>
+            <div class="centering-div">
+              <div class="ctext">
+                <% if(component.has_text_image.length > 0) %>
+                    <p class="<%=component.has_text_image %>"></p>
+                <% end %>
+                <p><%=component.tab_text[tabpath]%></p>
+              </div>
+            </div>
+          </li>
+      <% end%>
+    </ul>
+</section>

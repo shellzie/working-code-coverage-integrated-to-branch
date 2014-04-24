@@ -1,0 +1,108 @@
+<section class="cmobile-carousel">
+    <div class="content-container">
+        <div class="carousel-wrap outer-carousel">
+            <div class="carousel-viewport">
+                <ul class="carousel-slides" id="mobile-carousel">
+                    <li>
+                        <!-- iPad -->
+                        <div class="row">
+                            <div class="span10 offset1">
+								<%= render_child_component_if_exists_with_name(component, "ipad-text") %>
+
+                                <div class="carousel-wrap inner-carousel ipad-carousel">
+                                    <div class="carousel-viewport">
+                                        <ul class="carousel-slides" id="ipad-carousel">
+											<% (1..component.num_slides_ipad).each do |i| %>
+											  	<% if component.has_child?("ipad-slide-#{i}") %>
+													<li>
+														<%= render_child_component_if_exists_with_name(component, "ipad-slide-#{i}") %>
+													</li>
+											  	<% end %>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- iPhone -->
+                        <div class="row">
+                            <div class="span10 offset1">
+								<%= render_child_component_if_exists_with_name(component, "iphone-text") %>
+
+                                <div class="carousel-wrap inner-carousel iphone-carousel">
+                                    <div class="carousel-viewport">
+                                        <ul class="carousel-slides" id="iphone-carousel">
+											<% (1..component.num_slides_iphone).each do |i| %>
+											  	<% if component.has_child?("iphone-slide-#{i}") %>
+													<li>
+														<%= render_child_component_if_exists_with_name(component, "iphone-slide-#{i}") %>
+													</li>
+											  	<% end %>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Android -->
+                        <div class="row">
+                            <div class="span10 offset1">
+								<%= render_child_component_if_exists_with_name(component, "android-text") %>
+
+                                <div class="carousel-wrap inner-carousel android-carousel">
+                                    <div class="carousel-viewport">
+                                        <ul class="carousel-slides" id="android-carousel">
+											<% (1..component.num_slides_android).each do |i| %>
+											  	<% if component.has_child?("android-slide-#{i}") %>
+													<li>
+														<%= render_child_component_if_exists_with_name(component, "android-slide-#{i}") %>
+													</li>
+											  	<% end %>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+$(document).ready(function() {
+    $("#mobile-carousel").simplerCarousel({
+        clicknext : false,			// this #mobile-carousel outer carousel "looks" like
+        swipe	  : false,			// tabbed panels, so turn off clicknext and swipe events
+        callback  : function(){
+            // initialize site catalyst tracking for outer carousel tabs/pagination
+
+            var $tabs = $(this).parent()
+                               .siblings(".carousel-controls")
+                               .find(".carousel-pagination");
+
+            var $tab_ipad    = $tabs.find("li:nth-child(1)");
+            $tab_ipad.attr("data-wa-link", "<%= component.data_link_ipad %>");
+
+            var $tab_iphone  = $tabs.find("li:nth-child(2)");
+            $tab_iphone.attr("data-wa-link", "<%= component.data_link_iphone %>");
+
+            var $tab_android = $tabs.find("li:nth-child(3)");
+            $tab_android.attr("data-wa-link", "<%= component.data_link_android %>");
+
+
+            // initialize inner device carousels once outer carousel initializes
+
+            $("#ipad-carousel").simplerCarousel();
+            $("#iphone-carousel").simplerCarousel();
+            $("#android-carousel").simplerCarousel();
+        }
+    });
+    // simplerCarousel api info at https://github.com/jayhung/simplerCarousel
+});
+</script>

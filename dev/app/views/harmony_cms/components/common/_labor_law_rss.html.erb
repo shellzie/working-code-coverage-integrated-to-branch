@@ -1,0 +1,53 @@
+<section class="clabor-law">
+	<div class="labor-law clearfix">
+			<div class="labor-law-left-column">
+				<div class="state-container clearfix">
+					<div class="custom-select">
+							<%= select_tag 'labor_law_states', component.collection_for_dropdown.blank? ? "" : options_from_collection_for_select(component.collection_for_dropdown, 'value', 'name', ''), :name => component.list_type ,:prompt => component.dropdown_title if (component.list_type.eql?("jsonList") && !component.json_path.empty?) %>
+							<%= select_tag 'labor_law_states', options_for_select(component.manual_list),:name => component.list_type , :prompt => component.dropdown_title  if component.list_type.eql?("manualList") %>
+					</div>
+					<div class="select-state-poster">
+						<div class="states-map"></div>
+					</div>
+				</div>
+				<div class="no-state-details">
+						Sorry, we are not able to pull the labor law changes in your state at this moment. Please visit www.dol.gov for more information.
+				</div>
+				<% component.rss_data_other.each do |i| %>
+					
+					<div class="state-feed-content state_hidden" data-state="<%= i['category'] %>">
+						<p class="date"><%= i['formatted_date'] %></p>
+						<p class="feed-content-title"><%= i['title'] %></p>
+						<p class="new-poster"> New Poster Required</p>
+						<p class="feed-desc">
+							<%= i['description'] %>
+						</p>
+					</div>
+
+				<% end %>
+			</div>
+			
+			<div class="labor-law-right-column">
+				<div class="federal-container clearfix">
+					<div class="federal-title">Federal</div>
+					<div class="select-state-poster">
+						<div class="federal default-states-map"></div>
+					</div>
+				</div>
+				<% component.rss_data_federal.each do |i| %>
+					
+					<div class="default-state-feed-content" state="<%= i['category'] %>" >
+						<p class="date"><%= i['formatted_date'] %></p>
+						<p class="feed-content-title"><%= i['title'] %></p>
+						<p class="new-poster"> New Poster Required</p>
+						<p class="feed-desc">
+							<%= i['description'] %>
+						</p>
+					</div>
+					
+				<% end %>
+
+
+			</div>
+	</div>
+</section>

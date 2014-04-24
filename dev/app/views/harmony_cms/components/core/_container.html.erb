@@ -1,0 +1,36 @@
+<% container = component.child_component_with_name("container") %>
+<% unless component.image_url.blank? %>
+  <section class="<%= component.css_classes %>" style="height:<%= component.image_height %>px" <%= component.id_string.html_safe %> <%= component.data_wa_scroll_page_name %>>
+    <% unless component.resp_vport.blank? %>
+        <div class="bg <%= component.bg_color %>">
+          <%= cms_image_tag component.image_url, nil, {:alt => component.image_alt,
+                                                       :class => component.image_class,
+                                                       :lazy_load => component.lazy_load} %>
+        </div>
+    <% else %>
+        <div class="bg <%= component.bg_color %>">
+          <%= cms_image_tag component.image_url, nil, {:alt => component.image_alt,
+                                                       :class => component.image_class,
+                                                       :lazy_load => component.lazy_load,
+                                                       :style => component.image_align.eql?('center') ? "margin-left:-#{component.image_width.to_i/2}px" :  " " } %>
+        </div>
+    <% end %>
+    <% if (component.content_container === "true") %>
+        <div class="content-container">
+            <%= render_container container %>
+        </div>
+     <% else %>
+        <%= render_container container %>
+    <% end %>
+  </section>
+<% else %>
+  <section class="<%= component.css_bg_classes %>" <%= component.id_string.html_safe %> <%= component.data_wa_scroll_page_name %>>
+    <% if (component.content_container === "true") %>
+        <div class="content-container">
+          <%= render_container container %>
+        </div>
+    <% else %>
+        <%= render_container container %>
+    <% end %>
+  </section>
+<% end %>

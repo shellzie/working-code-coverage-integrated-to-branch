@@ -1,0 +1,17 @@
+<div class="modal-alert">
+    <div class="modal-container header">
+        <%= render_child_component_if_exists_with_name(component, "cq-headings") %>
+    </div>
+    <div class="body-container">
+        <div class="card-container">
+            <div class="modal-container">
+                <div class="row">
+                    <%= render_child_component_if_exists_with_name(component, "cq-modal-body") %>
+                </div>
+            </div>
+        </div>
+        <div class="modal-container footer">
+            <%= render_child_component_if_exists_with_name(component, "cq-modal-footer") %>
+		</div>
+    </div>
+</div>

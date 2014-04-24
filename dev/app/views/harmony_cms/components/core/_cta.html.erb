@@ -1,0 +1,15 @@
+<div class="ccta <%= "cta-align-" + component.cta_align %>">
+    <a <% unless component.cta_id.length == 0 %>id="<%= component.cta_id %>" <%end%>
+       class="cta<%= component.cta_style %> cta<%= component.cta_align %> <%= component.modal %>"
+    <% unless component.cta_data_link.length == 0 %> data-wa-link="<%=component.cta_data_link%>" <%end%>
+    <% unless component.cta_data_event.length == 0 %> data-wa-event="<%=component.cta_data_event%>" <%end%>
+    <% unless component.cta_data_onclose_url.length == 0 %> data-onclose-url="<%= component.cta_data_onclose_url %>" <% end %>
+    <% unless component.cta_modal_page_tracking.length == 0 %> data-wa-page="<%= component.cta_modal_page_tracking %>" <% end %>
+       href="<%= component.cta_link %>" 
+       <% unless component.cta_new_tab.length == 0 %>target="<%= component.cta_new_tab %>" <%end%>
+       <% unless component.data_cta_link.nil? %> data-href="<%= component.data_cta_link %>"<%end%>><%= component.cta_text %>
+        <% unless component.cta_visually_hidden_text.length == 0 %>
+            <span class="visually-hidden"><%= component.cta_visually_hidden_text %></span>
+        <% end %>
+    </a>
+</div>

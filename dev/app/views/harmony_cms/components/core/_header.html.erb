@@ -1,0 +1,21 @@
+<% cache_unless ShowroomCms.preview_mode, ["header", component], skip_digest: true do %>
+
+    <% if (component.is_top_header_aem_enabled) %>
+        <section class="aem-top-header top-header content-container">
+            <div class="aim-top-header-container">
+              <%= render_child_component_if_exists_with_name(component, "cq-aem-top-header") %>
+            </div>
+        </section>
+    <% else  %>
+        <section class="more-from-intuit">
+            <%= render_child_component_with_name(component, "cq-more-from-intuit") %>
+        </section>
+        <section class="top-header">
+            <%= render_child_component_with_name(component, "cq-top-header") %>
+        </section>
+        <nav>
+            <%= render_child_component_with_name(component, "cq-nav") %>
+        </nav>
+    <% end %>
+
+<% end %>

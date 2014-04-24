@@ -1,0 +1,9 @@
+<% cache_unless ShowroomCms.preview_mode, ["footer", component], skip_digest: true do %>
+  <section class="site-cooler-footer">
+    <%= render_child_component_with_name(component, "cq-site-footer") %>
+    <%= render_child_component_with_name(component, "cq-watercooler") %>
+  </section>
+  <section class="legal-footer">
+    <%= render_child_component_with_name(component, "cq-legal-footer") %>
+  </section>
+<% end %>

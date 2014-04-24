@@ -1,0 +1,7 @@
+<%# This is the view for editorial page %>
+<%= render component.body_template, {:component => component} %>
+
+<%# Include these if javascript and css specific to components need to be included and to avoid duplicates %>
+<%= content_for_cms_css %>
+<%= content_for_cms_js %>
+<%= render_aggregate_output aggregate_processor_output %>

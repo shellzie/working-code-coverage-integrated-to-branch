@@ -1,0 +1,10 @@
+<div class="cdisclosure <%= component.bg_color %> <%= component.top_margin_off %>">
+  <a href="#" class="toggle-disclosure" data-text="<%= component.link_name %>" 
+  <% unless component.link_name_toggle.length == 0 %> data-toggled-text="<%=component.link_name_toggle%>" <%end%> 
+  <% unless component.link_data_link.length == 0 %> data-wa-link="<%=component.link_data_link%>" <%end%>><%= component.link_name %></a>
+    <section class="cdisclosure-content hide-disclosure">
+      <div class="cdisclosure-text">
+         <%= component.text_data %>
+      </div>
+    </section>
+</div>

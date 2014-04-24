@@ -1,0 +1,134 @@
+= HarmonyCms
+= Please update the wiki too at : http://wiki.intuit.com/display/sbmdev/harmony_CMS+Gem+Change+List
+
+* 1.14.55     04/24/2014
+Jira Bug Fix :  CMS-823  -  Container component updates.(rsantra)
+
+* 1.14.54     04/23/2014
+Container component becomes responsive for DR and backward compatible for existing pages
+
+* 1.14.53     04/22/2014
+fixing the DFA additional params (hjagadish)
+
+* 1.14.52     04/22/2014
+User ID AJAX form validation.(ndanson)
+
+* 1.14.49     04/21/2014
+Adding Get Country and Region ID as per IP for Labor Law Modal.(rsantra)
+
+* 1.14.43     04/15/2014
+Fixing a bug in CTA component to align new tab, is modal and modal path values.(mstraka)
+
+* 1.14.42     04/14/2014
+adding opinion labs survey and comment card. Removed iperception.(sjakka1)
+
+* 1.14.41     14/04/2014
+Updating the SC setup in such a way that the right ensighten path is picked up from the harmony_cms.yml based on whether its dev/qa/prod (hjagadish)
+
+* 1.14.40     14/04/2014
+- Added Hero Carousel component. sekele
+
+* 1.14.39     04/11/2014
+-  Added Optimizely Functionality for Global
+
+* 1.14.38     04/01/2014
+-  Add link tracking to radio selection for modal-to-modal tracking..-
+
+* 1.14.37     04/01/2014
+- bug fix https://jira.intuit.com/browse/INT-1075 sjakka1
+
+* 1.14.36     03/30/2014
+- Making currency field in dialog itself . supadhyay4
+
+* 1.14.34     03/27/2014
+- Jira Bug Fix CMS-753  -  Image component update for having linkUrl to have precedence over external_url. rsantra
+
+* 1.14.32     03/25/2014
+- Reverted changes done in image component to get height/width . supadhyay4
+
+* 1.14.31     03/25/2014
+- hero cta box pricing space issue fix CMS-519. sekele
+
+* 1.14.30     03/21/2014
+- Added trailing slashes to the product urls. jclemens
+
+* 1.14.29     03/21/2014
+- Added products to the Reviews Carousel component for Payroll and Payments. jclemens
+
+* 1.14.28     03/17/2014
+- updated base page templates to have promos. supadhyay4
+
+* 1.14.26     03/10/2014
+- updated erg to use render_child_component_if_exists_with_name methods. supadhyay4
+
+* 1.14.20     02/26/2014
+
+- prison page template changes for Costco QBO landing page. htakkelapati
+
+* 1.14.19     02/25/2014
+- labour law dropdown and CMS-762. supadhyay4
+
+* 1.14.18     02/24/2014
+- Adding Intuit.ShowRoomEnv object for modal refactor. mstraka
+
+* 1.14.17     02/21/2014
+- SiteCatalyst bug fix in Base Page. Allows SC to be disabled. don
+
+* 1.14.16     02/18/2014
+- promo banner href fix. supadhyay4
+
+* 1.14.15     02/17/2014
+- Header component now supports Advanced Editing Mode feature. don
+
+* 1.14.14     02/14/2014
+- Icon font implementation for email widget. supadhyay4
+
+* 1.14.13     02/13/2014
+- PCS template cleanup. mstraka
+
+* 1.14.12     02/11/2014
+- Promo Banner code clean-up. supadhyay4
+
+* 1.14.11     02/10/2014
+- Promo Banner code clean-up. supadhyay4
+
+* 1.14.10     02/05/2014
+- Fixed the merge conflict in this version. bbitla
+
+* 1.14.09     02/05/2014
+- [US18785] For Radio Selection Expansion component we need CTAs to have id attributes. bbitla
+
+* 1.14.08     02/04/2014
+- Promo Banner scheduling bug fix .  supadhyay4
+
+* 1.14.07     02/04/2014
+- Moving Promo Banner scheduling logic in SR .  rsoni
+
+* 1.14.06     02/04/2014
+- Offshore email capture widget.  supadhyay4
+
+* 1.14.05     01/22/2014
+- [US18624] In single_pricing_card_page/_card.html.erb changed span4 to span5.  jclemens
+
+* 1.14.04     01/21/2014
+- [US18624] In _radio_selection.html.erb, adding "on close URL" as a radio option.  jclemens
+
+* 1.14.03     01/16/2014
+- [CMS-732] In _sc_header.html.erb, adding conditional check for sbweb object don
+
+* 1.14.02     01/14/2014
+- [US18624] Add "on close URL" feature to modal CTAs. egoer
+
+* 1.14.01     01/14/2014
+- Offshore radio selection component changes
+
+* 1.14.00     01/09/2014
+- Pricing Card V2 with open container for image or whatever
+- Add support to jruby page component, tested in dr project
+- Add json and text template for base_page component and container component
+
+* 1.13.07     01/02/2014
+- [US17729] Add optional data-wa-page-scroll-name attribute to container and section. egoer
+
+* 1.13.06     12/30/2013
+- Adding configuration in harmony_cms.yml for devint environment. mstraka

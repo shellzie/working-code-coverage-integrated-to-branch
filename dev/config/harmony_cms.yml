@@ -1,0 +1,42 @@
+default: &default
+  qbo_url: //wcgo2c3.quickbooks.intuit.com
+  uid_validation_url: //qa.sr.quickbooks.intuit.com
+  ga_account_number: UA-34096460-1
+  lp_account_number: 19343400
+  sc_account_qb: intuitqballdev,intuitsbeqa
+  optimizely_acc_number: 755320091
+  ensighten_path: intuit/sbg-stage/Bootstrap.js
+  ensighten_bootstrap: //nexus.ensighten.com/intuit/us_fms_dev/Bootstrap.js
+  pr_toolmap: //qa.pr.assets.intuit.com/toolmap_
+  pr_data_layer: //qa.pr.assets.intuit.com/datalayer_
+development:
+  <<: *default
+
+qa:
+  <<: *default
+
+production: &production
+  <<: *default
+  qbo_url: //quickbooks.intuit.com
+  uid_validation_url: //quickbooks.intuit.com
+  ga_account_number: UA-34101350-1
+  lp_account_number: 37343836
+  sc_account_qb: intuitquickbooks,intuitsbe,intuitqball
+  optimizely_acc_number: 235704801
+  ensighten_path: intuit/sbg/Bootstrap.js
+  ensighten_bootstrap: //nexus.ensighten.com/intuit/us_fms_prod/Bootstrap.js
+  pr_toolmap: //qa.pr.assets.intuit.com/toolmap_
+  pr_data_layer: //qa.pr.assets.intuit.com/datalayer_
+
+lvdc_production:
+  <<: *production
+
+performance:
+  <<: *default
+  qbo_url: //inf2.quickbooks.intuit.com
+
+devprod:
+  <<: *default
+
+devint:
+  <<: *default

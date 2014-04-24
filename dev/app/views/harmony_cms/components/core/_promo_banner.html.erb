@@ -1,0 +1,41 @@
+<%if component.promo_banner_activation_status.eql?("activated")%>
+    <style>
+        #promo_banner .ctext p {
+            color : <%=component.text_color %>;
+        }
+    </style>
+    <% unless component.image_url.blank? %>
+        <section class="ccontainer promo-banner" style="height:<%= component.image_height %>px;background-color :<%= component.bg_color %>" id="promo_banner">
+          <div class="bg <%= component.bg_color %>">
+            <a href="<%= component.promo_banner_link %>" <% unless component.promo_banner_data_link.length == 0 %> data-wa-link="<%=component.promo_banner_data_link%>" <%end%> <% unless component.promo_banner_data_event.length == 0 %> data-wa-event="<%=component.promo_banner_data_event%>" <%end%>>
+              <%= cms_image_tag component.image_url, nil, {:alt => component.image_alt,
+                                                           :class => component.image_class,
+                                                           :lazy_load => component.lazy_load,
+                                                           :style => "margin-left:-#{component.image_width.to_i/2}px"} %>
+            </a>
+          </div>
+          <div class="content-container"/>
+          <%= render_child_component_if_exists_with_name(component, "promo_banner_grid")%>
+          </div>
+        </section>
+
+    <% else %>
+        <a href="<%= component.promo_banner_link %>" <% unless component.promo_banner_data_link.length == 0 %> data-wa-link="<%=component.promo_banner_data_link%>" <%end%>
+           <% unless component.promo_banner_data_event.length == 0 %> data-wa-event="<%=component.promo_banner_data_event%>" <%end%>>
+          <section class="ccontainer" style="background-color :<%= component.bg_color %>" id="promo_banner">
+            <div class="content-container"/>
+            <%= render_child_component_if_exists_with_name(component, "promo_banner_grid")%>
+            </div>
+          </section>
+        </a>
+
+    <% end %>
+
+	<script type="text/javascript">
+	            $(document).ready(function(){
+	                var promoBannerText = '<%= component.promo_banner_disclosure_text.squish.html_safe %>';
+	                $('div.cdisclosure-text').first().prepend(promoBannerText);
+	            });
+	</script>
+
+<%end%>

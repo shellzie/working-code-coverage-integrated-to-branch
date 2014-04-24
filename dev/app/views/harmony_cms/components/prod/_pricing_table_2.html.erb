@@ -1,0 +1,59 @@
+<section class="cpricing-table" id="pricing">
+
+  <h2 class="h2 center-align"><%=component.section_title%></h2>
+
+  <% if(component.include_tabs.eql?("true")) %>
+      <%= render_child_component_with_name(component,"pricing_table_tabs")  %>
+  <% end %>
+
+  <div class="row table-holder">
+
+    <%
+    (1..5).each do |user|
+      last_cell = user == 2 && component.is_2_col_table? || user == 3 && component.is_3_col_table? || user == 5 ? true : false
+       index_user = user - 1
+    %>
+    <dl class="one-col" tabindex="0">
+      <dt class="generic-cell cell-header<%= last_cell ? ' last-cell' : ''  %>">
+      <% if component.is_2_col_table? %>
+          <p class="p1 bold"><%= component.headers_for_2_col_table user %></p>
+          <% else %>
+       <p class="p1"><span class="bold"><%="#{user}"%></span> <%= component.users_text user %></p>
+          <% end %>
+      </dt>
+      <dd class="generic-cell cell-body<%= last_cell ? ' last-cell' : ''  %>" <%=component.aria_desc%>>
+        <div class="monthly-price">
+          <%=render_price(component.dynamic_price('m', index_user))%><% if component.is_2_col_table? %><span class="p1"><%= component.per_mo_year_text user %><sup>1</sup></span><%end%><% if(component.include_tabs.eql?('true')) %><span class="p2">/mo<sup>1</sup></span><% end %>
+          <div class="price-info">
+            <%=render_reg_price(component.dynamic_price('m', index_user))%>
+          </div>
+        </div>
+        <div class="annual-price hide">
+          <%=render_price(component.dynamic_price('a', index_user))%><% if(component.include_tabs.eql?("true")) %><span class="p2">/year<sup>1</sup></span><% end %>
+          <div class="price-info">
+            <%=render_reg_price(component.dynamic_price('a', index_user))%>
+          </div>
+        </div>
+        <div class="cta_container monthly-price">
+          <%= render_child_component_if_exists_with_name(component,"pricing_table_cta#{index_user}")  %>
+        </div>
+        <div class="cta_container annual-price hide">
+            <%= render_child_component_if_exists_with_name(component,"pricing_table_cta#{index_user}_annual")  %>
+        </div>
+      </dd>
+    </dl>
+    <%
+       break if last_cell
+    end
+    %>
+
+  </div>
+
+  <div class="row">
+      <div class="span7 badge-text">
+        <div class="websites-chat-icon badge"></div>
+        <%= render_child_component_if_exists_with_name(component,"pricing_table_badge_text")  %>
+    </div>
+  </div>
+
+</section>

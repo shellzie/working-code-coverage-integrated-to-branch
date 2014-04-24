@@ -1,0 +1,23 @@
+<section class="con-page-nav2" id="onPageNav2">
+  <table width="100%">
+    <tr>
+      <td>
+    <%= render_child_component_with_name(component, "cq-headings") %>
+  </td>
+
+    <% (0..component.no_of_links-1).each do |i| %>
+          <td class="navs">
+            <div>
+            <%= render_child_component_with_name(component, "icon-#{i}") if component.has_child?("icon-#{i}") %>
+            <%= render_child_component_with_name(component, "icon-hover#{i}") if component.has_child?("icon-#{i}") %>
+            <%= render_child_component_with_name(component, "title-#{i}") if component.has_child?("title-#{i}") %>
+          </div>
+          </td>
+    <% end %>
+
+  <td class="cta-btn hidden">
+    <div>
+      <%= render_child_component_with_name(component, "cta") %>
+    </div>
+  </td></tr></table>
+</section>

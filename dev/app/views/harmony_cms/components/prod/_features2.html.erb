@@ -1,0 +1,49 @@
+<style>
+<% for i in 0..(component.bar_percent.length - 1) %>
+    .cfeatures2 .bar<%= i+1 %> span {width: <%= component.bar_percent[i] %>%;}
+<% end %>
+</style>
+<section<%= component.id_features %> class="content-container cfeatures2">
+    <% if(component.is_header) %>
+        <div class="header">
+            <div class="row">
+                <div class="span8">
+                    <h3><%= component.header_col1 %></h3>
+                </div>
+                <div class="span4">
+                    <h3 class="img"><%= component.header_col2 %></h3>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="span8">
+            <ul>
+            <% for i in 0..(component.bar_percent.length - 1) %>
+                <li class="bar<%= i+1 %>">
+                  <span class="bg-shaded"></span>
+                  <div class="figure-container">
+                    <div class="figure"><%= component.bar_percent[i] %><sup>%</sup></div>
+                    <div class="caption"><%= component.bar_text[i] %></div>
+                  </div>
+                </li>
+            <% end %>
+            </ul>
+        </div>
+        <div class="span4">
+            <%= render_child_component_if_exists_with_name(component, "image_col2") %>
+        </div>
+    </div>
+  <% if(component.is_cta_and_label.eql?("true")) %>
+  <div class="section-header">
+      <div class="centered">
+        <div>
+          <h3><%= component.cta_label %></h3>
+        </div>
+        <div class="cta_container">
+          <%= render_child_component_if_exists_with_name(component, "cta_opt") %>
+        </div>
+      </div>
+  </div>
+  <% end %>
+</section>

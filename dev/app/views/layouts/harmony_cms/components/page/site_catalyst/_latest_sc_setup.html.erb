@@ -1,0 +1,25 @@
+<%# Pull the latest SC code from TMS -%>
+<script type="text/javascript" src="//nexus.ensighten.com/<%= HarmonyCms::ensighten_path %>"></script>
+<%# Set the basic SC variables -%>
+<script type="text/javascript">
+    if (typeof(wa) == "undefined") {
+        wa={}
+    }
+    wa.pageLoadStart    = new Date();
+    wa.siteName         = "<%= component.site_name %>";
+    wa.siteGroup        = "<%= component.site_group %>";
+    wa.siteHost         = "<%= component.site_host %>";
+
+    var aryProd = <%= (component.products.empty? ? '[]' : component.products).html_safe %>;
+    if (aryProd != "") {
+        wa.aryProducts = aryProd;
+        wa.eventList = "prodView";
+    }
+
+    //sbm_intuit_id cookie value saved in wa.visitorID for Ensighten to store in var74
+    /*i.com does not use harmony standard page templates which will cause js error when Intuit.Library.Cookie is accessed. Adding 
+    check if Intuit.Library.Cookie varialbe is defined 04/01/14 - sjakka1. This can be removed when i.com moves to harmony standard page template*/
+    if(typeof Intuit.Library.Cookie != "undefined"){ 
+        wa.userId = Intuit.Library.Cookie.getUUID();
+    }
+</script>

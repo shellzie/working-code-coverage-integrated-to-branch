@@ -1,0 +1,53 @@
+<div class="content-container">
+
+	<section class="ccomp-yoy-header ccomparison-table-header-saas persist-header">
+		<section class="headings">
+			<div class="row">
+                <div class="span6">
+                    <h2 class="headtitle"><%= component.h2%></h2>
+					<h3><%= render_child_component_if_exists_with_name(component, "cq-text") %></h3>
+				</div>
+				<div class="fix-margin">
+					<section class="ccomp-table-yoy-header">                      
+						<div class="cqpricing2">
+							<%= render_child_component_if_exists_with_name(component, "cq-pricing-2") %>
+						</div>
+						<div class="pricingcard-header-left"></div>
+						<div class="cqpricing">
+							<%= render_child_component_if_exists_with_name(component, "cq-pricing-3") %>
+						</div>
+					</section>
+				</div>
+			</div>
+		</section>
+	</section>
+
+    <section id="comparison_table_saas" class="ccomp-yoy-table ccomparison-table-saas" role="grid">
+        <%
+			tableData = component.table_data.gsub(/✓/, '<span class="checkmark"></span>')
+		%>
+		<%= tableData.html_safe %>
+    </section>
+
+    <div class="cqfeaturemsg"><%= render_child_component_if_exists_with_name(component, "cq-feature-text") %></div>
+    <div class="carddivider"></div>
+    
+    <section class="ccomparison-table-header-saas persist-header pricingcard-header-top">
+        <section class="headings">
+            <div class="row">
+                <div class="span6"><h2>&nbsp;</h2></div>
+                <div class="fix-margin">
+                    <section class="ccomp-table-yoy-header ccomp-table-yoy-header-bottomline">                 
+                        <div class="cqpricing2">
+                            <%= render_child_component_if_exists_with_name(component, "cq-pricing-4") %>
+                        </div>
+                        <div class="pricingcard-header-left"></div>
+                        <div class="cqpricing">
+                            <%= render_child_component_if_exists_with_name(component, "cq-pricing-5") %>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>

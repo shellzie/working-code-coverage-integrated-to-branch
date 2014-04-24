@@ -1,0 +1,6 @@
+<div class="chero-cta-box">
+  <h1 class="h1"><%= component.heading %></h1>
+  <p class="p1"><%= component.p1_text %></p>
+  <%= render_child_component_if_exists_with_name(component, "cq-cta") %>
+  <%= render_child_component_if_exists_with_name(component, "cq-text") %>
+</div>

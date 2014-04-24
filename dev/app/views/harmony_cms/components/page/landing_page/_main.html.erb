@@ -1,0 +1,15 @@
+<section id="main">
+    <div class="outer-container">
+      <%= render_child_component_if_exists_with_name(component, "cq-container0")%>
+
+        <div class="content-container">
+    		<%= render_child_component_if_exists_with_name(component, "cq-container1")%>
+        </div>
+        <%= render_child_component_if_exists_with_name(component, "cq-container2")%>
+        <div class="content-container" style="margin-bottom:54px;">
+    		<%= render_child_component_if_exists_with_name(component, "cq-container3")%>
+        </div>
+        <%= render_child_component_if_exists_with_name(component, "cq-container4")%>
+        <%= render_child_component_with_name(component, "cq-disclosure") if component.has_child?("cq-disclosure") %>
+    </div>
+</section>

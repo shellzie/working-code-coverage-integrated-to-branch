@@ -1,0 +1,15 @@
+<%# These will add the css and js files if not already added
+    They are there to serve as an example. Hence commenting them out
+%>
+<%#  cms_css_include_tag "admin_css" %>
+<%#  cms_js_include_tag "admin_js" %>
+
+<div class="row">
+  <% component.grid_styles.each_index { |index| %>
+      <div class="<%= component.grid_columns[index]["non-resp"] %> <%= component.grid_columns[index]["resp-dt"] %> <%= component.grid_columns[index]["resp-tb"] %> <%= component.grid_columns[index]["resp-mo"] %>">
+      <% if component.properties.has_key?("col#{index}") %>
+        <%= render_child_component_with_name(component, "col#{index}") %>
+      <% end %>
+      </div>
+  <% } %>
+</div>

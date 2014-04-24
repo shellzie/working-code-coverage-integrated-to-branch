@@ -1,0 +1,34 @@
+<div class="cpricing-card">
+    <div class="pricing-card-header">
+        <h4><%= render_child_component_if_exists_with_name(component,'cq-content-header') %></h4>
+    </div>
+    <div class="table-row">
+        <%
+        i = 0
+        while i < component.num_of_prices do
+        %>
+        <div class="pricing-card-content clearfix" style="width:<%= component.pricing_card_content_width %>">
+            <% if component.public_send("is_enabled_burst_#{i}") %>
+            <div class="pricing-content-burst-wrapper pricing-content-burst-wrapper-align-<%= component.public_send("burst_placement_#{i}") %> <%= component.public_send("burst_pushdown_#{i}") %>">
+                <div class="global-sprite pricing-content-burst">
+                    <p><%= render_child_component_if_exists_with_name(component,"cq-content-burst-#{i}") %></p>
+                </div>
+            </div>
+            <% end %>
+            <div class="content-wrapper">
+                <% if component.is_enabled_adv_edit %>
+                    <%= render_child_component_if_exists_with_name(component,"cq-content-container-#{i}") %>
+
+                <% else %>
+                    <%= render_child_component_if_exists_with_name(component,"cq-content-pricing-#{i}") %>
+                    <%= render_child_component_if_exists_with_name(component,"cq-content-cta-#{i}") %>
+                    <%= render_child_component_if_exists_with_name(component,"cq-content-list-#{i}") %>
+                <% end %>
+            </div>
+        </div>
+        <%
+        i+= 1
+        end
+        %>
+    </div>
+</div>

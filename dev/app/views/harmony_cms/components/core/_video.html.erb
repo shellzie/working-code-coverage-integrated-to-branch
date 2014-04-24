@@ -1,0 +1,6 @@
+<% if component.video_id.nil? %>
+    <h1>Please enter youtube id!</h1>
+<% else %>
+    <div class="cvideo" data-youtube-id="<%= component.video_id %>" data-autoplay="<%= component.autoplay %>"></div>
+    <a class="visually-hidden" id="sc-<%= component.video_id %>"<%=" data-wa-link=\"#{component.sc_data_link}\"".html_safe unless component.sc_data_link.empty?%><%=" data-wa-event=\"#{component.sc_data_event}\"".html_safe unless component.sc_data_event.empty?%>></a>
+<% end %>

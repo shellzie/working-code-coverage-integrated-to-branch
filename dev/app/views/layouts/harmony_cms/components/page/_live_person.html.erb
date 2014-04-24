@@ -1,0 +1,22 @@
+<%= javascript_include_tag "harmony/assets/base/js/merged/mtagconfig" if component.lp_proactive_invites_enabled? %>
+<script>
+    var lpMTagConfig = lpMTagConfig || {}; lpMTagConfig.vars = lpMTagConfig.vars || [];
+    lpMTagConfig.lpServer       = "<%= component.lp_server %>";
+    lpMTagConfig.lpTagSrv       = "<%= component.lp_tagserver %>";
+    lpMTagConfig.lpNumber       = "<%= HarmonyCms::lp_account_number %>";
+    lpMTagConfig.deploymentID   = "<%= component.lp_deploymentid %>";
+    lpMTagConfig.vars.push(["page","unit","<%=  component.lp_unit %>"]);
+    lpMTagConfig.vars.push(["session","language","english"]);
+    lpMTagConfig.vars.push(["session","campaign","<%= component.lp_session_campaign %>"]);
+    lpMTagConfig.vars.push(["page","inviteChat","<%=  component.lp_proactive_invites_enabled? %>"]);
+    
+    var lp_product_name = '<%= component.product_name %>';
+    if(lp_product_name != ''){
+      lpMTagConfig.vars.push(['page','ProductName','<%= component.product_name %>']);
+    }
+    var lp_section = '<%= component.lp_section %>';
+    if(lp_section != ''){
+      lpMTagConfig.vars.push(['page','Section','<%= component.lp_section %>']);
+    }
+    
+</script>

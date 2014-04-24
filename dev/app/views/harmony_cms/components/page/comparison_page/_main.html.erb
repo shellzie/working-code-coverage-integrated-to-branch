@@ -1,0 +1,8 @@
+<section id="main">
+  <div class="outer-container">
+    <%= render_child_component_with_name(component, "cq-container") if component.has_child?("cq-container") %>
+    <div class="content-container">
+      <%= render_child_component_with_name(component, "cq-comp-table-template-disclaimer") if component.has_child?("cq-comp-table-template-disclaimer") %>
+    </div>
+  </div>
+</section>

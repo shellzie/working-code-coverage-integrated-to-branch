@@ -1,0 +1,19 @@
+<div class="modal-container">
+  <%= render_child_component_if_exists_with_name(component, "cq-headings")%>
+</div>
+
+<div>
+  <div class="modal-container">
+    <%= render_child_component_if_exists_with_name(component, "cq-text")%>
+  </div>
+
+  <%= render component.card_template, {:component => component} %>
+
+  <div class="modal-container">
+    <div class="continue_link">
+      <%= render_child_component_if_exists_with_name(component, "cq-cta")%>
+    </div>
+    <%= render_child_component_if_exists_with_name(component, "cq-disclosure")%>
+  </div>
+
+</div>

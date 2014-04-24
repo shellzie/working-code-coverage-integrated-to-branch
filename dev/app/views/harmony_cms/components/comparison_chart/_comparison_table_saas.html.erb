@@ -1,0 +1,53 @@
+<div class="content-container">
+  <div class="persist-area" role="grid" aria-readonly="true">
+    <section class="ccomp-yoy-header ccomparison-table-header-saas persist-header">
+      <section class="headings">
+        <div class="row">
+          <div class="span6">
+            <h2><%= component.h2 %></h2>
+          </div>
+          <div class="span6 fix-margin">
+            <section class="ccomp-table-yoy-header">
+              <table width="100%" cellspacing="0" cellpadding="0" border="0" hide_rows_starting_at="<%=component.hide_rows_starting_at%>" role="presentation">
+                <tbody>
+                <tr role="row">
+                  <td></td>
+                  <th role="columnheader" class="header-cell col-header-2"><%=component.box1_title%></th><!--  id="ccomp-chart-col-2-header" -->
+                  <th role="columnheader" class="header-cell col-header-3"><%=component.box2_title%></th><!--  id="ccomp-chart-col-3-header" -->
+                  <th role="columnheader" class="header-cell col-header-4"><%=component.box3_title%></th><!--  id="ccomp-chart-col-4-header" -->
+                </tr>
+                <tr role="row">
+                  <td role="columnheader" class="col-header-1"><!-- id="ccomp-chart-col-1-header" -->
+                    <span class="visually-hidden">Features</span>
+                  </td>
+                  <td aria-describedby="ccomp-chart-col-2-header"><span class="price"><span class="price-cents"><%=component.currency_symbol%></span><span class="price-whole"><%=component.price_whole('box1_price')%>.</span><span class="price-cents"><%=component.price_cents('box1_price')%></span><p class="per-month"> /month</p></span>
+                    <div class="cta">
+                      <%= render_child_component_if_exists_with_name(component, "box1_cta") %>
+                    </div>
+                  </td>
+                  <td aria-describedby="ccomp-chart-col-3-header"><span class="price"><span class="price-cents"><%=component.currency_symbol%></span><span class="price-whole"><%=component.price_whole('box2_price')%>.</span><span class="price-cents"><%=component.price_cents('box2_price')%></span><p class="per-month"> /month</p></span>
+                    <div class="cta">
+                      <%= render_child_component_if_exists_with_name(component, "box2_cta") %>
+                    </div>
+                  </td>
+                  <td aria-describedby="ccomp-chart-col-4-header"><span class="price"><span class="price-cents"><%=component.currency_symbol%></span><span class="price-whole"><%=component.price_whole('box3_price')%>.</span><span class="price-cents"><%=component.price_cents('box3_price')%></span><p class="per-month"> /month</p></span>
+                    <div class="cta">
+                      <%= render_child_component_if_exists_with_name(component, "box3_cta") %>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="comparison_table_saas" class="ccomp-yoy-table ccomparison-table-saas" role="grid">
+      <%
+         tableData =  component.table_data.gsub(/✓/, '<span class="checkmark"></span>')
+      %>
+      <%= tableData.html_safe %>
+    </section>
+  </div>
+</div>

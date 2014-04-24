@@ -1,0 +1,9 @@
+<section id="main">
+  <div class="outer-container">
+    <%= render_child_component_with_name(component, "cq-headings") if component.has_child?("cq-headings") %>
+    <div class="content-container">
+      <%= render_child_component_with_name(component, "cq-container") if component.has_child?("cq-container") %>
+    </div>
+    <%= render_child_component_with_name(component, "cq-disclosure") if component.has_child?("cq-disclosure") %>
+  </div>
+</section>

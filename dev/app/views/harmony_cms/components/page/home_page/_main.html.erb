@@ -1,0 +1,84 @@
+<section id="main" class="main">
+    <%= render_child_component_with_name(component, "cq-hero") if component.has_child?("cq-hero") %>
+    <%= render_child_component_with_name(component, "cq-hero-promo") if component.has_child?("cq-hero-promo") %>
+
+
+    <div class="outer-container">
+		<% if component.has_child?("benefits-title") %>
+			<div class="content-container benefits-title">
+				<%= render_child_component_with_name(component, "benefits-title") %>
+			</div>
+		<% end %>
+
+		<!-- main benefits content -->
+		<div class="cbenefits">
+			<% if component.has_child?("benefit1-media") or
+				  component.has_child?("benefit1-text") or
+				  component.has_child?("benefit1-cta")
+			%>
+				<div class="benefit">
+					<div class="content-container">
+						<div class="row">
+							<div class="span7">
+								<%= render_child_component_with_name(component, "benefit1-media") if component.has_child?("benefit1-media") %>
+							</div>
+							<div class="span4">
+								<%= render_child_component_with_name(component, "benefit1-text") if component.has_child?("benefit1-text") %>
+								<%= render_child_component_with_name(component, "benefit1-cta") if component.has_child?("benefit1-cta") %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+
+			<% if component.has_child?("benefit2-media") or
+				  component.has_child?("benefit2-text") or
+				  component.has_child?("benefit2-cta")
+			%>
+				<div class="benefit">
+					<div class="content-container">
+						<div class="row">
+							<div class="span4 offset1">
+								<%= render_child_component_with_name(component, "benefit2-text") if component.has_child?("benefit2-text") %>
+								<%= render_child_component_with_name(component, "benefit2-cta") if component.has_child?("benefit2-cta") %>
+							</div>
+							<div class="span7">
+								<%= render_child_component_with_name(component, "benefit2-media") if component.has_child?("benefit2-media") %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+
+			<% if component.has_child?("benefit3-media") or
+				  component.has_child?("benefit3-text") or
+				  component.has_child?("benefit3-cta")
+			%>
+				<div class="benefit">
+					<div class="content-container">
+						<div class="row">
+							<div class="span7">
+								<%= render_child_component_with_name(component, "benefit3-media") if component.has_child?("benefit3-media") %>
+							</div>
+							<div class="span4">
+								<%= render_child_component_with_name(component, "benefit3-text") if component.has_child?("benefit3-text") %>
+								<%= render_child_component_with_name(component, "benefit3-cta") if component.has_child?("benefit3-cta") %>
+							</div>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+
+        <%= render_child_component_with_name(component, "reviews_carousel") if component.has_child?("reviews_carousel") %>
+	    <% if component.has_child?("attachments") %>
+			<div class="content-container">
+		        <%= render_child_component_with_name(component, "attachments") %>
+		  	</div>
+		<% end %>
+	    <% if component.has_child?("banner") %>
+            <%= render_child_component_with_name(component, "banner") %>
+		<% end %>
+        <%= render_child_component_with_name(component, "cq-container") if component.has_child?("cq-container") %>
+    </div>
+</section>

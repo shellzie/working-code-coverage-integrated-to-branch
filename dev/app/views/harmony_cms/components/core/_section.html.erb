@@ -1,0 +1,6 @@
+<section id="<%= component.id_section %>" class="csection content-container" <%= component.data_wa_scroll_page_name %>>
+  <% if (component.is_header_disabled.eql?("false"))  %>
+  <%= render_child_component_if_exists_with_name(component, "cq-headings1")%>
+  <% end %>
+  <%= render_child_component_if_exists_with_name(component, "cq-container1")%>
+</section>

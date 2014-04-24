@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale.to_s %>">
+<head>
+  <meta charset="UTF-8">
+  <% #<meta name="viewport" content="width=device-width, initial-scale=1.0"> %>
+  <!-- We like people who view source. Check out our careers page http://careers.intuit.com/ -->
+  <%= tag("meta", name: "viewport", content: "width=device-width, initial-scale=1.0".html_safe) if component.viewport? %>
+  <%= tag("meta", name: "keywords", content: "#{component.meta_tags}") if component.meta_tags.present? %>
+  <%= tag("meta", name: "description", content: "#{component.description.html_safe}") if component.description.present? %>
+  <%= tag("meta", name: "robots", content: "#{component.robots}") if component.robots.present? %>
+  <%= tag("link", rel: "canonical", href: "#{component.canonical}") if component.canonical.present? %>
+  <title><%= component.page_title %></title>
+  <%= favicon_link_tag '/favicon.png', rel: 'icon', type: 'image/x-icon' %>
+  <%= stylesheet_link_tag *component.css_lib %>
+  <%= yield :cms_component_css %>
+  <%= render :partial => "layouts/harmony_cms/components/page/live_person", :locals => {:component => component} if component.lp_enabled? %>
+  <%= javascript_include_tag *component.top_js_lib %>
+  <%= render :partial => "layouts/harmony_cms/components/page/sc_header" if !component.register? & component.enable_site_catalyst? & !component.enable_latest_site_catalyst? %>
+  <%= javascript_include_tag "harmony/assets/site_catalyst_header/js/merged/site_catalyst_header" if !component.register? & component.enable_site_catalyst? & !component.enable_latest_site_catalyst? %>
+  <%= render :partial => "layouts/harmony_cms/components/page/site_catalyst/latest_sc_setup", :locals => {:component => component} if !component.register? & component.enable_latest_site_catalyst? %>
+  <%= javascript_include_tag "harmony/assets/google_analytics_header/js/merged/google_analytics_header" if !component.register? & component.enable_google_analytics? %>
+  <%= render :partial => "layouts/harmony_cms/components/page/ga_init_script" if !component.register? & component.enable_google_analytics? %>
+  <%= render :partial => "layouts/harmony_cms/components/page/page_registry", :locals => {:component => component} if component.register? %>
+ <% if component.enable_optimizely_for_global? %>
+      <script src="//cdn.optimizely.com/js/<%= HarmonyCms::optimizely_acc_number %>.js"></script>
+  <% end %>
+  <%= yield :cms_component_scripts %>
+</head>
+<body>
+<%= yield %>
+<%= javascript_include_tag *component.bottom_js_lib %>
+<%= javascript_include_tag "harmony/assets/google_analytics_footer/js/merged/google_analytics_footer" if !component.register? & component.enable_google_analytics? %>
+<%= javascript_include_tag "harmony/assets/geo_targeting/js/merged/geo_targeting" if component.enable_geo_targeting? %>
+<%# Will use this until we implement a permanent solution. The following includes a script which will go to atg and include javascript in an iframe %>
+<%= render "layouts/harmony_cms/components/page/channel_attribution", {:component => component} if component.do_channel_attribution? %>
+<%= render :partial => "layouts/harmony_cms/components/page/dfa_tracking", :locals => {:component => component} if !component.register? & component.add_dfa? %>
+<%= render :partial => "layouts/harmony_cms/components/page/sc_footer" if !component.register? & component.enable_site_catalyst? & !component.enable_latest_site_catalyst? %>
+<%= javascript_include_tag "harmony/assets/site_catalyst_footer/js/merged/site_catalyst_footer" if !component.register? & component.enable_site_catalyst? & !component.enable_latest_site_catalyst? %>
+<script language="JavaScript">
+    //global object to show we are in Showroom env
+    $(function($, window, document){
+        if (typeof Intuit.ShowRoomEnv === 'object') {
+            return;
+        }
+        window.Intuit && (window.Intuit.ShowRoomEnv = {});
+    }(jQuery, window, document));
+</script>
+
+<%= javascript_include_tag "harmony/assets/opinionlabs/js/merged/oo_engine.min" if component.enable_survey? || component.enable_feedbackcard? %>
+ <%= stylesheet_link_tag  "harmony/assets/opinionlabs/css/merged/opinionlabs" if component.enable_survey? || component.enable_feedbackcard? %>
+<% if component.enable_survey?%>
+    <% if Rails.env.include?("production") %>
+        <%= javascript_include_tag "harmony/assets/opinionlabs/js/merged/oo_conf_invite.min" %>
+    <% else %>
+        <%= javascript_include_tag "harmony/assets/opinionlabs/js/merged/oo_conf_invite_test.min" %>
+    <% end %>
+<% end %>
+<%= javascript_include_tag "harmony/assets/opinionlabs/js/merged/oo_conf.min" if component.enable_feedbackcard? %>
+</body>
+</html>

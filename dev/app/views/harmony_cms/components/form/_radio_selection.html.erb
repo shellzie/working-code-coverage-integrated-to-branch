@@ -1,0 +1,65 @@
+<div class="cradio_selection">
+    <form>
+		<%= render_child_component_if_exists_with_name(component, "cq-question") %>
+	<% 
+		if(component.links.empty? ) 
+			sprintf('Please insert Radio Options').html_safe
+		else
+			if (!component.links.kind_of?(Array))
+				radioOptionsString = JSON.parse(component.links)
+				%>
+				<div>
+					<input class="cradio_selection_option" type="radio" name="question" id="<%= "radio_option0" %>" value="<%= radioOptionsString["radiotext"].downcase %>"							   
+						<% if(radioOptionsString["openInNewModal"] == true && !radioOptionsString["modalurl"].blank?) %>
+							isModal="<%= radioOptionsString["openInNewModal"] %>"								 
+							modal_path="<%= radioOptionsString["modalurl"] %>"
+							on_close_url="<% radioOptionString["oncloseURL"] %>" 
+							link_tracking="<%= radioOptionsString["linkTracking"] %>" 
+							modal_tracking="<%= radioOptionsString["modalTracking"] %>" 
+						<% else 
+							if(!radioOptionsString["endurl"].blank? ) %>							
+								static_end_url="<%= radioOptionsString["endurl"] %>"
+							<% end 
+						end %> checked="checked"/>
+					<label for="<%= "radio_option0" %>" class="cradio_selection_option_label"><%= radioOptionsString["radiotext"] %></label>
+				</div>
+			<%
+			else
+				component.links.each_with_index do |item, i|
+					radioOptionsString = JSON.parse(item)%>
+					<div>
+						<input class="cradio_selection_option" type="radio" name="question" id="<%= "radio_option#{i}" %>" 
+								value="<%= radioOptionsString["radiotext"].downcase %>"							   
+								<% if(radioOptionsString["openInNewModal"] == true && !radioOptionsString["modalurl"].blank?) %>
+									isModal="<%= radioOptionsString["openInNewModal"] %>"								 
+									modal_path="<%= radioOptionsString["modalurl"] %>"
+									on_close_url="<%= radioOptionsString["oncloseURL"] %>" 
+									link_tracking="<%= radioOptionsString["linkTracking"] %>" 
+    							modal_tracking="<%= radioOptionsString["modalTracking"] %>" 
+								<% else 
+									if(!radioOptionsString["endurl"].blank? ) %>							
+										static_end_url="<%= radioOptionsString["endurl"] %>"
+									<% end
+								end 
+								if( i==0 ) %> 
+									checked="checked" 
+								<% end %> />
+						<label for="<%= "radio_option#{i}" %>" class="cradio_selection_option_label"><%= radioOptionsString["radiotext"] %></label>
+					</div>
+				<% end 
+			end
+		end
+	%>
+	</form>
+</div>
+<div class="cradio_selection_bottom_text clearfix" >
+  <%= render_child_component_if_exists_with_name(component, "cq-callus") %>
+  <div class="cradio_selection_cta_group" >
+    <% if(!component.cancel_text.blank?) %>
+        <a id="cta-cancel" class="ccta cta<%= component.cancel_style %> ctacancel" <% unless component.cancel_data_link.length == 0 %> data-wa-link="<%= component.cancel_data_link %>" <% end %>
+           <% unless component.cancel_data_event.length == 0 %> data-wa-event="<%= component.cancel_data_event %>" <% end %> ><%= component.cancel_text %></a>
+    <% end %>
+    <a id="cta-continue" class="ccta cta<%= component.continue_style %>" <% unless component.continue_data_link.length == 0 %> data-wa-link="<%= component.continue_data_link %>" <% end %>
+       <% unless component.continue_data_event.length == 0 %> data-wa-event="<%= component.continue_data_event %>" <% end %> ><%= component.continue_text %></a>
+  </div>
+</div>

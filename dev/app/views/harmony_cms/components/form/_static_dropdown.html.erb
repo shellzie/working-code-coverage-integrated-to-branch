@@ -1,0 +1,3 @@
+<%= select_tag 'static_dropdown', component.collection_for_dropdown.blank? ? "" : options_from_collection_for_select(component.collection_for_dropdown, 'value', 'name', ''), :name => component.list_type ,:prompt => component.dropdown_title if (component.list_type.eql?("jsonList") && !component.json_path.empty?) %>
+<%= select_tag 'static_dropdown', options_for_select(component.manual_list),:name => component.list_type , :prompt => component.dropdown_title  if component.list_type.eql?("manualList") %>
+

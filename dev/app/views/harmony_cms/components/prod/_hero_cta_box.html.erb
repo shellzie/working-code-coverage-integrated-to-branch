@@ -1,0 +1,8 @@
+<div class="chero-cta-box">
+  <h1 class="h3"><%= component.heading %></h1>
+  <div class="pricing-box">
+    <p class="p2"><%= component.pricing_text %><%=render_price(component.dynamic_price)%><%= component.pricing_per %></p>
+    <%= sprintf('<div class="price-info">%s</div>', render_reg_price(component.dynamic_price)).html_safe %>
+  </div>
+  <%= render_child_component_with_name(component, "cq-cta") %>
+</div>

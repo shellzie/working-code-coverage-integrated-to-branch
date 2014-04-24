@@ -1,0 +1,10 @@
+<%= render_child_component_with_name(component, "cq-nav-promo") if component.has_child?("cq-nav-promo") %>
+<section id="main">
+  <%= render_child_component_if_exists_with_name(component, 'cq-hero') %>
+  <div class="outer-container">
+    <div class="content-container">
+	  <%= render_child_component_if_exists_with_name(component, 'cq-container') %>
+    </div>
+	<%= render_child_component_if_exists_with_name(component, 'cq-disclosure') %>
+  </div>
+</section>

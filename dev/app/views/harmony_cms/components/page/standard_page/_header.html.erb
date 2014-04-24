@@ -1,0 +1,4 @@
+<header id="mainHeader" class="main-header">
+    <%= render_child_component_if_exists_with_name(component, "cq-header") %>
+</header>
+<%= render_child_component_with_name(component, "cq-nav-promo") if component.has_child?("cq-nav-promo") %>

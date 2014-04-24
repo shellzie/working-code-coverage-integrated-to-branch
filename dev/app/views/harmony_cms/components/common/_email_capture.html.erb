@@ -1,0 +1,14 @@
+<div class="cemail-box <%= component.css_color  %>">
+
+    <div data-icon="b" class="icon icon-email-env"></div>
+    <p class="email-heading p1"><%= component.email_heading  %></p>
+
+    <form id="email-capture" class="email-form"  novalidate>
+        <input type="email" name="email" placeholder="<%= component.email_text %>"  class="email-text">
+        <input type="submit" value="Submit" class="email_submit_button">
+    </form>
+
+    <p class="email-success hide p2"><span data-icon="a" class="icon icon-confirm-check"></span><%= component.success_msg  %></p>
+    <p class="email-error hide p4"><%= component.error_msg  %></p>
+
+</div>

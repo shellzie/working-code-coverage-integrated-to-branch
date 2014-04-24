@@ -1,0 +1,17 @@
+<div class="creview" itemprop="review" itemscope itemtype="http://schema.org/Review">
+    <div class="header">
+        <div class="pull-right">
+            <div class="global-sprite rating-stars">
+                <span class="global-sprite rating rating-{{rating}}" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                    rating: <span itemprop="ratingValue">{{rating}}</span>
+                </span>
+            </div>
+            {{#productName}}
+            <p class="product-name">{{productName}}</p>
+            {{/productName}}
+        </div>
+        <h3 itemprop="name">{{title}}</h3>
+        <p><span class="author" itemprop="author">{{creator}}</span>{{#formatted_date}} | <time pubdate datetime="{{date}}" itemprop="datePublished" >{{formatted_date}}</time>{{/formatted_date}}</p>
+    </div>
+    <div class="ctext" itemprop="description"><p class="p2">{{description}}{{#description_more}}<span class="read-more">... <a class="click-read-more" href="#">Read More</a></span><span class="more">{{description_more}}</span>{{/description_more}}</p></div>
+</div>

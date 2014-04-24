@@ -1,0 +1,13 @@
+<%
+  params = Hash.new
+  params["cid"] = component.page.request.params["cid"] if component.page.request.params.has_key?("cid")
+  params["sc"] = component.page.request.params["sc"] if component.page.request.params.has_key?("sc")
+  params["m360refdomain"] = component.page.request.referer.gsub(/https?:\/\/(.+?)\/(.*)/, '\1') unless component.page.request.referer.nil?
+
+  iframe_url = "#{HarmonyCms::qbo_url}/sbweb/common/tracking/qb_sourcecode.jsp?"
+  params.each_pair { |k,v|
+    iframe_url << '&' unless k == params.keys.first
+    iframe_url << "#{k}=#{v}"
+  }
+%>
+<iframe src="<%= iframe_url %>" width="1" height="1" frameborder="0" style="display:none"> </iframe>

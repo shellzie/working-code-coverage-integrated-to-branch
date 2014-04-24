@@ -1,0 +1,37 @@
+<section class="creviews-carousel">
+	<div class="content-container">
+		<% if component.has_child?("header") %>
+			<div class="row">
+				<div class="span8 offset2">
+					<%= render_child_component_with_name(component, "header") %>
+				</div>
+			</div>
+		<% end %>
+		<div class="row">
+			<div class="span12">
+				<div class="carousel-wrap">
+					<div class="row">
+						<div class="span10 offset1">
+							<div class="carousel-viewport">
+								<ul id="reviews-carousel" class="carousel-slides">
+									<% (1..component.num_slides).each do |i| %>
+										<li>
+											<%= render_child_component_with_name(component, "review-#{i}") if component.has_child?("review-#{i}") %>
+										</li>
+									<% end %>
+								</ul>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+$(document).ready(function() {
+    $("#reviews-carousel").each(function(){
+    	$(this).simplerCarousel();
+    });
+});</script>

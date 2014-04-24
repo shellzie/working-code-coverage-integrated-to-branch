@@ -1,0 +1,18 @@
+<div id="features" class="cfeatures-tabbed">
+  <h2 class="h2 section-header"><%= component.heading %></h2>
+    <%= render_child_component_with_name(component, "cq-tabs") %>
+    <div class="content-block">
+      <%
+      (0...component.items_list.length).each do |i|
+            j = i +1
+            class_name = ( j === component.active_option.to_i()) ? "style=display:block" : "style=display:none"
+            bu_name =  component.items_list[i]
+      %>
+            <ul <%= class_name %> id="<%=bu_name%>">
+                <%= render_child_component_with_name(component, "cq-features1-#{i}")  %>
+            </ul>
+       <% end %>
+     </div>
+</div>
+
+

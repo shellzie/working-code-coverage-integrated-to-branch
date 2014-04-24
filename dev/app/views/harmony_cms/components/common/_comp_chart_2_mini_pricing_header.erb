@@ -1,0 +1,14 @@
+<section class="comp-chart-mini-pricing-header">
+  <div class="comp-chart-mini-pricing-header-wrapper">
+    <div class="<%= component.background_color %>">
+      <div class="comp-chart-mini-pricing-header-text">
+        <%= render_child_component_if_exists_with_name(component, "cq-text-header") %>
+      </div>
+    </div>
+    <div class="comp-chart-mini-pricing-header-content">
+      <%= render_child_component_if_exists_with_name(component, "cq-text-top-content") %>
+      <%= render_child_component_if_exists_with_name(component, "cq-cta-pricing-header") %>
+      <%= render_child_component_if_exists_with_name(component, "cq-text-bot-content") %>
+    </div>
+  </div>
+</section>

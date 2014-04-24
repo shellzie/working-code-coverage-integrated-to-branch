@@ -1,0 +1,31 @@
+<section id="overview" class="content-container ctext-overview">
+    <h2 class="section-header"><%= component.header %></h2>
+    <div class="row">
+		<div class="span3">
+			<%= render_child_component_with_name(component, "image-1") if component.has_child?("text-1") %>
+        </div>
+		<div class="span3">
+			<%= render_child_component_with_name(component, "image-2") if component.has_child?("text-2") %>
+        </div>
+		<div class="span3">
+			<%= render_child_component_with_name(component, "image-3") if component.has_child?("text-3") %>
+        </div>
+		<div class="span3">
+			<%= render_child_component_with_name(component, "image-4") if component.has_child?("text-4") %>
+        </div>
+    </div>
+	<div class="row">
+        <div class="span3">
+			<%= render_child_component_with_name(component, "text-1") if component.has_child?("text-1") %>
+        </div>
+        <div class="span3">
+			<%= render_child_component_with_name(component, "text-2") if component.has_child?("text-2") %>
+        </div>
+        <div class="span3">
+			<%= render_child_component_with_name(component, "text-3") if component.has_child?("text-3") %>
+        </div>
+        <div class="span3">
+			<%= render_child_component_with_name(component, "text-4") if component.has_child?("text-4") %>
+        </div>
+    </div>
+</section>

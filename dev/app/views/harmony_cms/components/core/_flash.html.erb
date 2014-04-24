@@ -1,0 +1,20 @@
+<% if component.flash_path_url.length > 0 %>
+    <div class="flash-box">
+      <div class="flash-container">
+        <% if component.preview_poster.eql?("on") %>
+            <div class="flash-preview" style="background:url('<%= component.preview_image_url %>');width:<%=component.inline_width%>px;height:<%=component.inline_height%>px;" >
+              <span style="background:url('<%= component.video_icon_url %>') no-repeat;" class="play-icon" id="play-icon"></span>
+            </div>
+            <div class="cflash hide" style="width:<%=component.inline_width%>px;height:<%=component.inline_height%>px;">
+              <embed width="<%=component.inline_width%>" height="<%=component.inline_height%>" wmode="transparent" version="9.0.0" scale="exactfit" type="application/x-shockwave-flash" src="<%= cms_flash_path(component.flash_path_url) %>">
+            </div>
+        <% else %>
+            <div class="cflash">
+              <embed width="<%=component.inline_width%>" height="<%=component.inline_height%>" wmode="transparent" version="9.0.0" scale="exactfit" type="application/x-shockwave-flash" src="<%= cms_flash_path(component.flash_path_url) %>">
+            </div>
+        <% end %>
+      </div>
+    </div>
+<% else %>
+    <p class="p1">Please set the flash file path!</p>
+<% end %>

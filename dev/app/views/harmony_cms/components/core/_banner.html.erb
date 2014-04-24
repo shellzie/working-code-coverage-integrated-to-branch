@@ -1,0 +1,8 @@
+<section class="cbanner <%=component.banner_text_bgcolor %>">
+  <div class="centered">
+    <div class="banner-text"><%=component.banner_text%></div>
+    <div class="cta_container">
+      <%= render_child_component_if_exists_with_name(component, "banner_cta_a")%>
+    </div>
+  </div>
+</section>

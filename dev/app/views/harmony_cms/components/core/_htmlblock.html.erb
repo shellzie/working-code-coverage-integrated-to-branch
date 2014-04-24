@@ -1,0 +1,9 @@
+<div>
+  <%
+     content = component.content
+     #replacing any cq reference path with proper asset path.
+     #TODO: should consider better way of doing this inside CQ. And not have any direct references to CQ image path.
+     content.gsub!(/src\s*=\s*['"]\/etc\/designs\/(.+?)['"]/) { |s| %Q(src="#{asset_path($1)}") }
+  %>
+  <%= content.html_safe %>
+</div>

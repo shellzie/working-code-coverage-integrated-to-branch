@@ -1,0 +1,8 @@
+<header id="mainHeader" class="main-header">
+  <%= render_child_component_if_exists_with_name(component, 'cq-header') %>
+</header>
+<%= render component.main_template, {:component => component} %>
+<%= render_child_component_if_exists_with_name(component, "cq-bottom-promo") %>
+<footer>
+  <%= render_child_component_if_exists_with_name(component, 'cq-footer') %>
+</footer>

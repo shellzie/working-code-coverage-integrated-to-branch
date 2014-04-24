@@ -1,0 +1,13 @@
+<section id="main">
+  <div class="outer-container cseo">
+    <div class="chero-seo">
+      <%= render_child_component_if_exists_with_name(component, "cq-hero") %>
+    </div>
+    <div class="content-container">
+      <%= render_child_component_if_exists_with_name(component, "cq-container") %>
+    </div>
+    <div class="bottom-container">
+        <%= render_child_component_if_exists_with_name(component, "cq-container2") %>
+     </div>
+  </div>
+</section>

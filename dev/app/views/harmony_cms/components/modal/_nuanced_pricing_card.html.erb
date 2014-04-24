@@ -1,0 +1,26 @@
+<%
+    strikethrough_text = render_reg_price(component.dynamic_price)
+	omniture_data_link = (component.omniture_data_link).blank? ? "" : component.omniture_data_link
+	if omniture_data_link.length > 0
+		sc_closex_data_link_attr = omniture_data_link+"-Close-X"
+		sc_closeout_data_link_attr = omniture_data_link+"-Close-Out"
+	end
+%>
+<div class="cnuanced-pricing-card small-box-w-header modal-pricing-card">
+	<% if omniture_data_link.length > 0  %>
+    	<a class="visually-hidden" id="modal-xclose" data-wa-link="<%= sc_closex_data_link_attr%>" ></a>
+    	<a class="visually-hidden" id="modal-outclose" data-wa-link="<%= sc_closeout_data_link_attr%>" ></a>
+	<% end %>
+    <header>
+        <%= render_child_component_if_exists_with_name(component, 'cq-header') %>
+    </header>
+    <section>
+        <div class="cta1">
+            <%= render_child_component_if_exists_with_name(component, 'cq-cta') %>
+        </div>
+        <%= render_child_component_if_exists_with_name(component, 'cq-text') %>
+        <% unless strikethrough_text.blank? %>
+            <p class="crossed"><%= strikethrough_text %></p>
+        <% end %>
+    </section>
+</div>

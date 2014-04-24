@@ -1,0 +1,26 @@
+<div class="creview">
+    <header class="clearfix">
+        <div class="pull-right">
+            <% if ("0" != component.rating) # value == 0 means to hide ratings %>
+				<span class="global-sprite rating-stars">
+					<span class="global-sprite rating rating-<%= component.rating %>">
+						rating: <%= component.rating %>
+					</span>
+				</span>
+			<% end %>
+            <% if ("hide" != component.product && "" != component.product_url) %>
+                <p class="p4">
+                    <a href="<%= component.product_url %>"><%= component.product %></a>
+                </p>
+            <% end %>
+              <% if ("hide" != component.product && "" == component.product_url) %>
+                  <p class="p4">
+                     <%= component.product %>
+                  </p>
+              <% end %>
+        </div>
+	    <p class="p1"><%= component.title %></p>
+        <time class="p3"><%= component.date %></time>
+    </header>
+	<%= render_child_component_with_name(component, "text") if component.has_child?("text") %>
+</div>

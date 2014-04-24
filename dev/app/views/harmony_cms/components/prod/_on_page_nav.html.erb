@@ -1,0 +1,23 @@
+<section id="onPageNav" class="con-page-nav">
+    <div class="content-container">
+        <div class="title">
+            <h2><%= component.heading %></h2>
+        </div>
+        <ul class="clearfix">
+            <% component.nav.each do |text|
+                key = component.nav_map[text]%>
+                <li <%=" data-wa-link=\"#{component.sc_map[text]['sc_data_link']}\"".html_safe unless component.sc_map[text]['sc_data_link'].blank?%><%=" data-wa-event=\"#{component.sc_map[text]['sc_data_event']}\"".html_safe unless component.sc_map[text]['sc_data_event'].blank?%>>
+                    <div>
+                        <div class="global-sprite <%=key%>-icon"></div>
+                        <a href="#<%=key%>"><%=text%></a>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+        <div class="cta">
+            <div>
+                <%= render_child_component_with_name(component, 'cta') if component.has_child?('cta')%>
+            </div>
+        </div>
+    </div>
+</section>

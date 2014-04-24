@@ -1,0 +1,10 @@
+<section id="main">
+  <section id="pageHeading" class="content-container">
+    <%= render_child_component_if_exists_with_name(component, "cq-headings") %>
+  </section>
+  <section id="mainContent" class="outer-container">
+    <div class="content-container">
+      <%= render_child_component_if_exists_with_name(component, "cq-container") %>
+    </div>
+  </section>
+</section>

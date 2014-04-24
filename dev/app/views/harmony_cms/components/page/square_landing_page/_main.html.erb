@@ -1,0 +1,29 @@
+<%= render_child_component_with_name(component, "cq-nav-promo") if component.has_child?("cq-nav-promo") %>
+<section id="main" class="square-landing-page">
+  <div class="outer-container">
+    <div class="content-container">
+      <%= render_child_component_with_name(component, "cq-heading01") if component.has_child?("cq-heading01")%>
+      <div class="subheading">
+        <%= render_child_component_with_name(component, "cq-subheading01") if component.has_child?("cq-subheading01")%>
+      </div>
+    </div>
+    <section class="value row">
+      <div class="span5 offset1">
+        <%= render_child_component_with_name(component, "cq-image01") if component.has_child?("cq-image01")%>
+      </div>
+      <div class="span5 offset1">
+        <ul>
+          <div class="check-bullet-item"><%= render_child_component_with_name(component, "cq-check01") if component.has_child?("cq-check01")%><li><%= render_child_component_with_name(component, "cq-subheading02") if component.has_child?("cq-subheading02")%></li></div>
+          <div class="check-bullet-item"><%= render_child_component_with_name(component, "cq-check02") if component.has_child?("cq-check02")%><li><%= render_child_component_with_name(component, "cq-subheading03") if component.has_child?("cq-subheading03")%></li></div>
+          <div class="check-bullet-item"><%= render_child_component_with_name(component, "cq-check03") if component.has_child?("cq-check03")%><li><%= render_child_component_with_name(component, "cq-subheading04") if component.has_child?("cq-subheading04")%></li></div>
+        </ul>
+      </div>
+    </section>
+    <section class="options">
+      <%= render_child_component_with_name(component, "cq-tabbed-section") if component.has_child?("cq-tabbed-section")%>
+    </section>
+  </div>
+  <div class="outer-container">
+    <%= render_child_component_with_name(component, "cq-disclosure") if component.has_child?("cq-disclosure")%>
+  </div>
+</section>

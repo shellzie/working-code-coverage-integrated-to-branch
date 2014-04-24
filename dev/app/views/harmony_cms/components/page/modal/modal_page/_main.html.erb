@@ -1,0 +1,7 @@
+<%= render_child_component_if_exists_with_name(component, "cq-container") %>
+<script type="text/javascript">
+        $(window).on('modal:open', function(){
+            Intuit.Library.Video.YouTubePlayer.init();
+        });
+</script>
+

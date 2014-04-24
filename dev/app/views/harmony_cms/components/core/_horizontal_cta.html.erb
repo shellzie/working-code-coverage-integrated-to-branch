@@ -1,0 +1,15 @@
+<%
+	sidebysideclass = "sidebyside";
+    sidebyside = component.sidebyside
+	if (sidebyside == "true")
+		sidebysideclass = "nosidebyside";
+	end
+%>
+<div class="ctawrapper<%= component.align %> clearfix" >
+    <div class="margin10 <%= sidebysideclass %>">
+    	<%= render_child_component_if_exists_with_name(component, 'cq-cta-1') %>
+    </div>
+    <div class="margin10 <%= sidebysideclass %>">
+    	<%= render_child_component_if_exists_with_name(component, 'cq-cta-2') %>
+    </div>
+</div>

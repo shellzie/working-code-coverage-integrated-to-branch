@@ -1,0 +1,5 @@
+<% cache_unless ShowroomCms.preview_mode, ["legal_footer", component], skip_digest: true do %>
+  <section class="legal-footer">
+    <%= render_child_component_with_name(component, "cq-legal-footer") %>
+  </section>
+<% end %>

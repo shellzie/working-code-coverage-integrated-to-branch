@@ -1,0 +1,3 @@
+<div class="<%= component.text_class %>"<%= ' style="display:none"'.html_safe if component.hide_component == "true" %>>
+  <%= render_dynamic_price_text(component.text_data, component.dynamic_price_all) %>
+</div>

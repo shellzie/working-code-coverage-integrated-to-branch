@@ -1,0 +1,43 @@
+<%
+	header_icon_text = component.is_header_icon_enabled.eql?('true') && component.header_icon_text
+	section_icon_enabled_class = component.is_section_icon_enabled.eql?('true') ? '' : ' section-icon-disabled'
+	section_icon_left_class = component.section_icon_position.eql?('left') ? ' inline' : ''	
+%>
+<div class="cproduct-pricing-card clearfix">
+	<div class="csimple-pricing-card small-box-w-header">
+	<% if (!component.is_header_icon_enabled.eql?('true')) %>
+        <header>
+            <div class="centered">
+                <div>
+            		<h4><%= component.top_label %></h4>
+            		<h3><%= component.bot_label %></h3>
+                </div>
+            </div>
+        </header>
+	<% else %>
+        <header class="promo">
+            <div class="centered">
+                <div>
+            		<h4><%= component.top_label %></h4>
+            		<h3><%= component.bot_label %></h3>
+                </div>
+            </div>
+            <div class="global-sprite poff">
+                <div class="centered">
+                	<div class="text"><%= component.header_icon_text %></div>
+                </div>
+            </div>
+        </header>
+	<%end %>
+        <section>
+            <div class="image-price-container clearfix <%= section_icon_left_class %><%= section_icon_enabled_class %>">
+                <div class="card-text">                  
+					<%= render_child_component_if_exists_with_name(component, "card-section-text")%>
+                </div>
+                <div class="cta1">
+					<%= render_child_component_if_exists_with_name(component, "card-section-cta")%>                   
+                </div> 
+            </div>   
+        </section>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<section id="main">
+    <div class="outer-container">
+		<div class="section-header">
+		    <%= render_child_component_with_name(component, "cq-heading") if component.has_child?("cq-heading") %>
+        </div>
+
+	    <%= render_child_component_with_name(component, "cq-hero-container") if component.has_child?("cq-hero-container") %>
+
+        <div class="content-container cfeature-template">
+	        <%= render_child_component_with_name(component, "cq-container") if component.has_child?("cq-container") %>
+        </div>
+        <div class="bg-green">
+	        <%= render_child_component_with_name(component, "cq-banner") if component.has_child?("cq-banner") %>
+        </div>
+        <%= render_child_component_with_name(component, "cq-disclosure") if component.has_child?("cq-disclosure") %>
+    </div>
+</section>

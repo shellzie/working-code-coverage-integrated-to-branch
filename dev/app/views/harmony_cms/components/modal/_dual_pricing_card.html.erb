@@ -1,0 +1,78 @@
+<%
+   percentage_off_annual = render_percentage_off(component.dynamic_price('annual'))
+   percentage_off_monthly = render_percentage_off(component.dynamic_price('monthly'))
+   annual_price = component.dynamic_price('annual')
+   annual_unit = annual_price['display_price'].nil? ? 'year' : 'month'
+   omniture_data_link = (component.omniture_data_link).blank? ? "" : component.omniture_data_link
+   if omniture_data_link.length > 0
+		sc_closex_data_link_attr = omniture_data_link+"-Close-X"
+		sc_closeout_data_link_attr = omniture_data_link+"-Close-Out"
+   end
+%>
+<div class="cdual-pricing-card modal-container clearfix">
+	<% if omniture_data_link.length > 0  %>
+    	<a class="visually-hidden" id="modal-xclose" data-wa-link="<%= sc_closex_data_link_attr%>" ></a>
+    	<a class="visually-hidden" id="modal-outclose" data-wa-link="<%= sc_closeout_data_link_attr%>" ></a>
+	<% end %>
+    <p class="p1"><%= component.label %></p>
+    <div class="csimple-pricing-card small-box-w-header modal-pricing-card">
+        <% if percentage_off_annual.nil? %>
+            <header>
+                <p><b>Annual</b> Plan</p>
+            </header>
+        <% else %>
+            <header class="promo">
+                <p class="annual-plan"><b>Annual</b> Plan</p>
+                <div class="global-sprite poff">
+                    <div>
+                        <span class="value"><%= percentage_off_annual %></span><sup>%</sup>
+                        <div class="off">OFF</div>
+                    </div>
+                </div>
+            </header>
+        <% end %>
+        <section>
+            <div class="price price-font">
+                <%=render_price(annual_price)%><span class="per">/<%=annual_unit%><sup><%= component.optional_annual_superscript %></sup></span>
+            </div>
+            <div class="price-info">
+                <%=render_reg_price(component.dynamic_price('annual'))%>
+                <%=render_extra_price(component.dynamic_price('annual'))%>
+                <%= render_child_component_if_exists_with_name(component, 'cq-text1') %>
+            </div>
+            <div class="cta1">
+                <%= render_child_component_if_exists_with_name(component, 'cq-cta1') %>
+            </div>
+        </section>
+    </div>
+    <div class="csimple-pricing-card small-box-w-header modal-pricing-card">
+        <% if percentage_off_monthly.nil? %>
+            <header>
+                <p><b>Monthly</b> Plan</p>
+            </header>
+        <% else %>
+            <header class="promo">
+                <p class="monthly-plan"><b>Monthly</b> Plan</p>
+                <div class="global-sprite poff">
+                    <div>
+                        <span class="value"><%= percentage_off_monthly %></span><sup>%</sup>
+                        <div class="off">OFF</div>
+                    </div>
+                </div>
+            </header>
+        <% end %>
+        <section>
+
+            <div class="price price-font">
+                <%=render_price(component.dynamic_price('monthly'))%><span class="per">/month<sup><%= component.optional_monthly_superscript %></sup></span>
+            </div>
+            <div class="price-info">
+                <%=render_reg_price(component.dynamic_price('monthly'))%>
+                <%= render_child_component_if_exists_with_name(component, 'cq-text2') %>
+            </div>
+            <div class="cta1">
+                <%= render_child_component_if_exists_with_name(component, 'cq-cta2') %>
+            </div>
+        </section>
+    </div>
+</div>

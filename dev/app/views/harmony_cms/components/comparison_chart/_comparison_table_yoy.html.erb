@@ -1,0 +1,51 @@
+<div class="content-container">
+  <div class="persist-area">
+    <section class="ccomp-yoy-header persist-header">
+      <section class="headings">
+        <div class="row">
+          <div class="span6">
+            <h2><%= component.h2 %></h2>
+          </div>
+          <div class="span6">
+            <section class="pricing-box">
+              <p class="p1"><%= component.price_text %></p>
+              <%=render_price(component.dynamic_price)%>
+              <%= sprintf('<div class="price-info">%s</div>', render_reg_price(component.dynamic_price)).html_safe %>
+              <%= render_child_component_with_name(component, "cta") %>
+            </section>
+          </div>
+        </div>
+        <div class="sub-head">
+          <div class="row">
+            <div class="span7">
+              <div class="centering-block">
+                <h3><%= component.h3 %></h3>
+              </div>
+            </div>
+            <div class="span5">
+              <section class="ccomp-table-yoy-header">
+                <table width="100%" cellspacing="0" cellpadding="1" border="0">
+                  <tbody>
+                  <tr>
+                    <% component.year_names.each do |name| %>
+                         <th><%=  name %></th>
+                    <% end %>
+                  </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section class="ccomp-yoy-table">
+      <div class="ccomparison">
+        <%
+        tableData =  component.text_data.gsub(/✓/, '<span class="checkmark"></span>')
+        %>
+        <%= tableData.html_safe %>
+      </div>
+    </section>
+  </div>
+</div>

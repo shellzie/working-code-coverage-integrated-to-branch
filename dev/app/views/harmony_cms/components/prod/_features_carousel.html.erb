@@ -1,0 +1,37 @@
+<section class="cfeatures-carousel" id="features">
+    <div class="content-container">
+		<% if component.has_child?("header") %>
+			<div class="row">
+				<div class="span8 offset2">
+					<%= render_child_component_with_name(component, "header") %>
+				</div>
+			</div>
+		<% end %>
+
+        <div class="carousel-wrap">
+            <div class="carousel-viewport">
+                <ul class="carousel-slides" id="features-carousel">
+					<% (1..component.num_slides).each do |i| %>
+						<li>
+							<div class="row">
+								<div class="span5 offset1">
+									<%= render_child_component_with_name(component, "feature#{i}-text") if component.has_child?("feature#{i}-text") %>
+								</div>
+								<div class="span5">
+									<%= render_child_component_with_name(component, "feature#{i}-media") if component.has_child?("feature#{i}-media") %>
+								</div>
+							</div>
+						</li>
+					<% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+$(document).ready(function() {
+    $("#features-carousel").each(function(){
+        $(this).simplerCarousel();
+    });
+});</script>

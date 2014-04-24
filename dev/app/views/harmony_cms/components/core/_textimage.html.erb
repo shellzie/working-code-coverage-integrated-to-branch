@@ -1,0 +1,24 @@
+<%
+   text_html_snippet = <<-TEXTHTML
+       <div class="#{component.text_class}">
+      #{render_dynamic_price_text(component.text_data, component.dynamic_price_all)}
+    </div>
+   TEXTHTML
+   image_html_snippet = <<-IMAGEHTML
+   #{cms_image_tag component.image_src, component.image.link_url, {:class => component.image_css_class, :alt => component.image.alt} unless component.image.nil?}
+   IMAGEHTML
+%>
+<div class="<%= component.css_class %>">
+  <% if (component.text_wrap != "wrap") %>
+    <% if component.image_align == "right" %>
+      <%= text_html_snippet.html_safe %>
+      <%= image_html_snippet.html_safe %>
+    <% else %>
+      <%= image_html_snippet.html_safe %>
+      <%= text_html_snippet.html_safe %>
+    <% end %>
+  <% else %>
+    <%= image_html_snippet.html_safe %>
+    <%= text_html_snippet.html_safe %>
+  <% end %>
+</div>

@@ -1,0 +1,26 @@
+<section id="overview" class="cvideo-overview">
+<div class="content-container">
+	<div class="row">
+		<div class="offset1 span10">
+            <h2 class="section-header"><%= component.sec_header %></h2>
+            <div class="top54">
+                <%=render_child_component_with_name(component,"cq-video")%>
+            </div>
+		</div>
+        <div class="offset3 span6 top30">
+			<p class="p1"><%= component.sec_text %></p>
+        </div>
+
+      <%  if component.display_link?  %>
+      <div class="offset3 span6 top42">
+          <a href="//<%= component.link_url %>" target="<%= component.link_target %>"<%=" data-wa-link=\"#{component.sc_data_link}\"".html_safe unless component.sc_data_link.blank?%><%=" data-wa-event=\"#{component.sc_data_event}\"".html_safe unless component.sc_data_event.blank?%>><%= component.link_text %></a>
+      </div>
+      <%  end %>
+      <%  if component.display_modal?  %>
+      <div class="offset3 span6 top42">
+          <a href="<%= component.modal_content_path%>" class="modal" target="<%= component.link_target %>"<%=" data-wa-link=\"#{component.sc_data_link}\"".html_safe unless component.sc_data_link.blank?%><%=" data-wa-event=\"#{component.sc_data_event}\"".html_safe unless component.sc_data_event.blank?%>><%= component.link_text %></a>
+      </div>
+      <%  end %>
+	</div>
+</div>
+</section>

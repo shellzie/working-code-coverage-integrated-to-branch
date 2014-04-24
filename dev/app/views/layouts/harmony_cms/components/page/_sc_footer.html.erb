@@ -1,0 +1,17 @@
+<script type="text/javascript">
+			QBInclude.isEnabled = true;
+			scDate = renderStartTime;
+			scRCSegment = 'default';
+
+            if (sbweb && sbweb.util) {
+                scPriorityCode = sbweb.util.cookies.getCookie('priorityCode');
+            } else {
+                scPriorityCode = "";
+            }
+
+			scProfileId = '';
+		        		if (renderStartTime != null)
+		        		{
+			        		scLoadTime = new Date() - renderStartTime;
+		        		}
+</script>

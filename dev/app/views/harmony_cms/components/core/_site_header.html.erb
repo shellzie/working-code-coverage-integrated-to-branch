@@ -1,0 +1,5 @@
+<% cache_unless ShowroomCms.preview_mode, ["site_header", component], skip_digest: true do %>
+  <nav>
+    <%= render_child_component_with_name(component, "cq-nav") %>
+  </nav>
+<% end %>

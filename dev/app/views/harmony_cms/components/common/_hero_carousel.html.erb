@@ -1,0 +1,40 @@
+<section class="chero-carousel">
+    <div class="carousel-viewport" id="<%= component.viewport_id %>">
+      <ul id="<%= component.carousel_name %>" class="carousel-slides">
+        <% component.slides.each do |cur| %>
+        <%   
+          slide_id, container_align, bg_color_class = cur.split("|")
+          img_path = "img-" + slide_id
+        %>
+            <li>
+              <section class="ccontainer">
+         <%= render_child_component_with_name(component, img_path) unless component.child_component_with_name(img_path).blank? %>
+
+                    <% if container_align && (container_align.downcase != "none") %>
+                      <div class="content-container-hero" >
+                      <% container_class =  container_align == "right" ?  "ccontainer-rt-just" : "ccontainer-lt-just" %>
+                        <div class="<%= container_class %>">
+                          <div class="box-container span6 <%= bg_color_class %>">
+                            <%= render_child_component_with_name(component, slide_id) if component.has_child?(slide_id) %>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+              </section>
+            </li>
+          <% end  unless component.slides.empty? #component.slides %>
+      </ul>
+    </div> 
+</section>
+
+<script>
+$(document).ready(function() {
+
+      initializeHeroCarousel("<%= component.slide_speed %>","<%= component.autoslide_speed %>","<%= component.carousel_name %>");
+
+      debouncing();
+
+      set_carousel_viewport("<%= component.viewport_id %>");
+
+});
+</script>

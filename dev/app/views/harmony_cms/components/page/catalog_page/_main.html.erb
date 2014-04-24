@@ -1,0 +1,7 @@
+<section id="main">
+    <div class="outer-container">
+      <div class="ccatalog">
+        <%= render_child_component_with_name(component, "cq-container") if component.has_child?("cq-container") %>
+        </div>
+    </div>
+</section>

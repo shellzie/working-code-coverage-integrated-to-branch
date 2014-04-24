@@ -1,0 +1,24 @@
+{
+  "name": "protractor-functional-test",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-cli": "*",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-istanbul": "^0.2.5",
+    "load-grunt-tasks": "^0.4.0",
+    "grunt-exec": "^0.4.5",
+    "grunt-shell-spawn": "^0.3.0",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-protractor-coverage": "^0.2.8",
+    "chai": "^1.9.1",
+    "mocha": "^1.18.2",
+    "jasmine-node": "^1.14.3",
+    "istanbul": "^0.2.7"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/protractor -- test/js/functional/protractor/protractorConf.js"
+  }
+}
