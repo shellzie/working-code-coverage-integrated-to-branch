@@ -16,7 +16,13 @@
     "chai": "^1.9.1",
     "mocha": "^1.18.2",
     "jasmine-node": "^1.14.3",
-    "istanbul": "^0.2.7"
+    "istanbul": "^0.2.7",
+    "grunt-run": "^0.2.2",
+    "grunt-wait": "^0.1.0",
+    "grunt-bg-shell": "^2.3.1",
+    "grunt-env": "^0.4.1",
+    "grunt-shell": "^0.7.0",
+    "grunt-boot-rails-async": "^0.1.1"
   },
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/protractor -- test/js/functional/protractor/protractorConf.js"

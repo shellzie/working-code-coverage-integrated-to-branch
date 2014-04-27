@@ -18,6 +18,15 @@ module.exports = function(grunt) {
 
         },
 
+        boot_rails_async: {
+            default_options: {
+                options: {
+                    cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy',
+                    gem_path: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
+                }
+            }
+        },
+
         clean: {
             coverageE2E: {   //delete whole coverage dir
                 src: ['<%= dirs.coverageE2E %>/']
@@ -45,6 +54,11 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        env: {
+            setCorrectGemset: {
+                GEM_PATH: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
+             }
+        },
         instrument: {
             files: [
                 '<%= dirs.app %>/spec/dummy/app/assets/javascripts/*.js',
@@ -57,17 +71,41 @@ module.exports = function(grunt) {
                 basePath: '<%= dirs.instrumentedE2E %>/'
             }
         },
-//
-//        shell: {
-//            rails_server: {
-//                command: 'rails server',
-//                options: {
-//                    async: true,     //an async process will be terminated when grunt finishes
-//                    execOptions: {
-//                        cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/dev/spec/dummy/coverage/instrumented'
-//                    }
-//                }
-//            },
+
+        run: {
+            options: {
+                cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy'
+            },
+            gems: {
+                cmd: '/Users/mkam1/.rvm/bin/rvm',
+                args: [
+                    'gemset',
+                    'use',
+                    'showroom_harmony_cms'
+                ]
+//                exec: '/Users/mkam1/.rvm/bin/rvm gemset use showroom_harmony_cms'
+            }
+        },
+
+        shell: {
+            specify_gemset: {
+                command: "/Users/mkam1/.rvm/bin/rvm gemset use showroom_harmony_cms",
+                options: {
+//                    wait: true,
+                    execOptions: {
+                        cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy'
+                    }
+                }
+            },
+            rails_server: {
+                command: 'rails server',
+                options: {
+                    async: false,     //an async process will be terminated when grunt finishes
+                    execOptions: {
+                        cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy'
+                    }
+                }
+            }//,
 //            selenium_server: {
 //                command: 'webdriver-manager start',
 //                options: {
@@ -79,34 +117,58 @@ module.exports = function(grunt) {
 //                        //whether true or false.
 //                    }
 //                }
-//            },
-//            istanbul_cover: {
-//                command: 'istanbul cover protractor -- protractorConf.js',
-//                options: {
-//                    async: true,     //an async process will be terminated when grunt finishes
-//                    execOptions: {
-//                        cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/dev/spec/dummy/test/js/functional/protractor'
-//                    }
-//                }
 //            }
-//        },
+        },
+
+        bgShell: {
+
+            startLess:{
+                cmd: "less /Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/someFile.txt",
+                bg: false,
+                stdout: true,
+                stderr: true,
+                stdin: true,
+                detached: false,
+                fail: false
+            },
+
+            get_to_project_directory: {
+
+                cmd: function() {
+                    return "rvm gemset use showroom_harmony_cms";
+                },
+//                stdout: true,
+//                stderr: true,
+                bg: false
+            },
+
+            rails_server: {
+                cmd: 'rails s', // or function(){return 'ls -la'}
+                execOpts: {
+                    cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy'
+                },
+                stdout: function(chunk){
+                    console.log(">>>>>>>>>>>>>>>>>> chunk = " + chunk + " >>>>> END_OF_CHUNK");
+                    done();
+                },
+                stderr: function(chunk){
+                    console.log(">>>>>>>>>>>>>>>>>> chunkErr = " + chunk + " >>>>> END_OF_CHUNK_ERR");
+                },
+                bg: false,
+                fail: true,
+                done: function() {
+
+                }
+            }
+        },
 
         protractor_coverage: {
             options: {
-                configFile: '/Users/mkam1/harmony_cms_sandbox/dev/spec/dummy/test/js/functional/protractor/protractorConf.js', // '<%= dirs.app %>/spec/dummy/test/js/functional/protractor/protractorConf.js',
+                configFile: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/dev/spec/dummy/test/js/functional/protractor/protractorConf.js', // '<%= dirs.app %>/spec/dummy/test/js/functional/protractor/protractorConf.js',
                 keepAlive: true, // If false, the grunt process stops when the test fails.
                 noColor: false, // If true, protractor will not use colors in its output.
-                coverageDir: '<%= dirs.instrumentedE2E %>',
+                coverageDir: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented',//<%= dirs.instrumentedE2E %>',
                 args: {}
-            },
-            phantom: {
-                options: {
-                    args: {
-                        baseUrl: 'http://localhost:3000/',
-                        // Arguments passed to the command
-                        'browser': 'phantomjs'
-                    }
-                }
             },
             chrome: {
                 options: {
@@ -129,18 +191,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', [
-        'clean',
-        'copy:appFiles',
-        'copy:libFiles',
-        'instrument',
-//        'shell:rails_server',
-//        'shell:selenium_server',
-//        'shell:istanbul_cover',
-//        'storeCoverage',
-//        'protractor_coverage:chrome',
-//        'makeReport'
-    ]);
+    grunt.registerTask('default', ['instrumentation', 'server', 'execution']);
 
     grunt.registerTask('instrumentation', [
         'clean:coverageE2E',
@@ -150,10 +201,42 @@ module.exports = function(grunt) {
         'instrument'
     ]);
 
+    grunt.registerTask('server', [
+//        'shell:specify_gemset',
+//        'run:gems',
+        //'bgShell:get_to_project_directory',
+        'env:setCorrectGemset',
+        'bgShell:rails_server'
+//        'run:rails_server',
+    ]);
+
+    grunt.registerTask('rails', [
+        'boot_rails_async'
+        ]);
+
+    grunt.registerTask('holdOnTask',[
+
+    ])
+
     grunt.registerTask('execution', [
         'protractor_coverage:chrome',
         'makeReport'
     ]);
+
+    grunt.registerTask('all', [
+        'clean:coverageE2E',
+        'copy:coverageE2E',
+        'clean:javascriptApp',
+        'clean:javascriptLib',
+        'instrument',
+        'boot_rails_async:default_options',
+        //'bgShell:startLess',
+        //'env:setCorrectGemset',
+        //'bgShell:rails_server',
+        'protractor_coverage:chrome',
+        'makeReport'
+    ]);
+
 
 
 };
