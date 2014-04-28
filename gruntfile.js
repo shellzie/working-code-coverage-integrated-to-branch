@@ -63,6 +63,7 @@ module.exports = function(grunt) {
                     cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy',
                     cmd: 'rails server',
                     matchString: 'Ctrl-C',
+                    appName: 'rails',
                     env: {
                         GEM_PATH: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
                     }
@@ -71,13 +72,15 @@ module.exports = function(grunt) {
             cq: {
                options: {
                    cmd: "~/cq5/author/crx-quickstart/bin/start",
-                   matchString: 'HTTP server port: 4502'   //the string to look for which signals server has successfully booted
+                   matchString: 'HTTP server port: 4502',   //the string to look for which signals server has successfully booted
+                   appName: 'apache'
                }
             },
             selenium: {
                 options: {
                     cmd: "webdriver-manager start",
-                    matchString: 'Started org.openqa.jetty.jetty.Server'   //the string to look for which signals server has successfully booted
+                    matchString: 'Started org.openqa.jetty.jetty.Server',   //the string to look for which signals server has successfully booted
+                    appName: 'selenium'
                 }
             }
         },
@@ -123,11 +126,10 @@ module.exports = function(grunt) {
                 command: "ps | grep rails | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null"
             },
             cq_quit: {
-                command: '~/cq5/author/crx-quickstart/bin/stop'
+                command: "ps | grep apache | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null", //'~/cq5/author/crx-quickstart/bin/stop',
+                failOnError: false
             }
         }
-
-
     });
 
     grunt.registerTask('default', ['instrumentation', 'server', 'execution']);
@@ -152,10 +154,9 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('quit_servers', [
-        'open:selenium_quit',  //visiting a URL
-        'shell:cq_quit',     //calling the 'stop' script
-        'shell:rails_quit' //hit control-C
-
+        'shell:rails_quit', //kill pid in terminal
+        'shell:cq_quit',     //run the 'stop' script
+        'open:selenium_quit'  //visit given URL for stopping server
     ]);
 
     grunt.registerTask('all', [
@@ -164,6 +165,9 @@ module.exports = function(grunt) {
         'clean:javascriptApp',
         'clean:javascriptLib',
         'instrument',
+        'open:selenium_quit',
+        'shell:cq_quit',
+        'shell:rails_quit',
         'boot_server_async:rails',
         'boot_server_async:cq',
         'boot_server_async:selenium',
