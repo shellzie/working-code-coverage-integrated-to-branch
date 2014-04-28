@@ -22,7 +22,8 @@
     "grunt-bg-shell": "^2.3.1",
     "grunt-env": "^0.4.1",
     "grunt-shell": "^0.7.0",
-    "grunt-boot-rails-async": "^0.1.1"
+    "grunt-open": "^0.2.3",
+    "grunt-boot-server-async": "^0.1.2"
   },
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/protractor -- test/js/functional/protractor/protractorConf.js"

@@ -57,11 +57,27 @@ module.exports = function(grunt) {
             }
         },
 
-        boot_rails_async: {
-            default_options: {
+        boot_server_async: {
+            rails: {
                 options: {
                     cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy',
-                    gem_path: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
+                    cmd: 'rails server',
+                    matchString: 'Ctrl-C',
+                    env: {
+                        GEM_PATH: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
+                    }
+                }
+            },
+            cq: {
+               options: {
+                   cmd: "~/cq5/author/crx-quickstart/bin/start",
+                   matchString: 'HTTP server port: 4502'   //the string to look for which signals server has successfully booted
+               }
+            },
+            selenium: {
+                options: {
+                    cmd: "webdriver-manager start",
+                    matchString: 'Started org.openqa.jetty.jetty.Server'   //the string to look for which signals server has successfully booted
                 }
             }
         },
@@ -92,7 +108,25 @@ module.exports = function(grunt) {
                 dir: '<%= dirs.coverageE2E %>/reports',
                 print: 'detail'
             }
+        },
+
+
+        open: {  //shutdown selenium server used for running our functional tests
+            selenium_quit : {
+                path: 'http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer'
+            }
+        },
+
+        shell: {
+            rails_quit: {
+                command: "ps | grep rails | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null"
+            },
+            cq_quit: {
+                command: '~/cq5/author/crx-quickstart/bin/stop'
+            }
         }
+
+
     });
 
     grunt.registerTask('default', ['instrumentation', 'server', 'execution']);
@@ -105,13 +139,22 @@ module.exports = function(grunt) {
         'instrument'
     ]);
 
-    grunt.registerTask('rails', [
-        'boot_rails_async'
+    grunt.registerTask('start_servers', [
+        'boot_server_async:rails',
+        'boot_server_async:cq',
+        'boot_server_async:selenium'
         ]);
 
     grunt.registerTask('execution', [
         'protractor_coverage:chrome',
         'makeReport'
+    ]);
+
+    grunt.registerTask('quit_servers', [
+        'open:selenium_quit',  //visiting a URL
+        'shell:cq_quit',     //calling the 'stop' script
+        'shell:rails_quit' //hit control-C
+
     ]);
 
     grunt.registerTask('all', [
@@ -120,8 +163,13 @@ module.exports = function(grunt) {
         'clean:javascriptApp',
         'clean:javascriptLib',
         'instrument',
-        'boot_rails_async:default_options',
+        'boot_server_async:rails',
+        'boot_server_async:cq',
+        'boot_server_async:selenium',
         'protractor_coverage:chrome',
-        'makeReport'
+        'makeReport',
+        'open:selenium_quit',
+        'shell:cq_quit',
+        'shell:rails_quit'
     ]);
 };
