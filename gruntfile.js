@@ -119,7 +119,8 @@ module.exports = function(grunt) {
 
         shell: {
             rails_quit: {
-                command: "ps | grep rails | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null"
+                //kill rails server. see example: http://stackoverflow.com/questions/12445331/killing-processes-shell
+                command: "ps | grep rails | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null"
             },
             cq_quit: {
                 command: '~/cq5/author/crx-quickstart/bin/stop'
