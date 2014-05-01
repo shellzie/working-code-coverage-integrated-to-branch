@@ -10,6 +10,7 @@ module.exports = function(grunt) {
         // Project settings
         dirs: {
             // configurable paths
+            home: '/Users/mkam1',  //Replace this with your own home directory
             app: 'dev',
             coverageE2E: 'coverage/e2e',
             instrumentedE2E: '<%= dirs.coverageE2E %>/instrumented',     //dev/coverage/e2e/instrumented/dev
@@ -48,8 +49,6 @@ module.exports = function(grunt) {
             files: [
                 '<%= dirs.app %>/spec/dummy/app/assets/javascripts/*.js',
                 '<%= dirs.app %>/spec/dummy/lib/assets/javascripts/harmony/assets/standard/js/*.js'
-                //'<%= dirs.app %>/app/assets/javascripts/*.js',
-                //'<%= dirs.app %>/lib/assets/javascripts/harmony/assets/**/*.js'
             ],
             options: {
                 lazy: true,        //take instrumented js files and save them to dev/coverage/e2e/instrumented/dev/spec/dummy.....
@@ -60,37 +59,34 @@ module.exports = function(grunt) {
         boot_server_async: {
             rails: {
                 options: {
-                    cwd: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented/dev/spec/dummy',
+                    cwd: '<%= dirs.instrumentedE2E %>/dev/spec/dummy',
                     cmd: 'rails server',
                     matchString: 'Ctrl-C',
-                    appName: 'rails',
                     env: {
-                        GEM_PATH: '/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:/Users/mkam1/.rvm/gems/ruby-1.9.3-p194@global'
+                        GEM_PATH: '<%= dirs.home %>/.rvm/gems/ruby-1.9.3-p194@showroom_harmony_cms:<%= dirs.home %>/.rvm/gems/ruby-1.9.3-p194@global'
                     }
                 }
             },
             cq: {
                options: {
                    cmd: "~/cq5/author/crx-quickstart/bin/start",
-                   matchString: 'HTTP server port: 4502',   //the string to look for which signals server has successfully booted
-                   appName: 'apache'
+                   matchString: 'HTTP server port: 4502'   //the string to look for which signals server has successfully booted
                }
             },
             selenium: {
                 options: {
                     cmd: "webdriver-manager start",
-                    matchString: 'Started org.openqa.jetty.jetty.Server',   //the string to look for which signals server has successfully booted
-                    appName: 'selenium'
+                    matchString: 'Started org.openqa.jetty.jetty.Server'   //the string to look for which signals server has successfully booted
                 }
             }
         },
 
         protractor_coverage: {
             options: {
-                configFile: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/dev/spec/dummy/test/js/functional/protractor/protractorConf.js', // '<%= dirs.app %>/spec/dummy/test/js/functional/protractor/protractorConf.js',
+                configFile: '<%= dirs.app %>/spec/dummy/test/js/functional/protractor/protractorConf.js',
                 keepAlive: true, // If false, the grunt process stops when the test fails.
                 noColor: false, // If true, protractor will not use colors in its output.
-                coverageDir: '/Users/mkam1/michelle_sbm_workspace/CMT/harmony_cms/coverage/e2e/instrumented',//<%= dirs.instrumentedE2E %>',
+                coverageDir: '<%= dirs.instrumentedE2E %>',
                 args: {}
             },
             chrome: {
@@ -113,7 +109,6 @@ module.exports = function(grunt) {
             }
         },
 
-
         open: {  //shutdown selenium server used for running our functional tests
             selenium_quit : {
                 path: 'http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer'
@@ -126,7 +121,7 @@ module.exports = function(grunt) {
                 command: "ps | grep rails | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null"
             },
             cq_quit: {
-                command: "ps | grep apache | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null", //'~/cq5/author/crx-quickstart/bin/stop',
+                command: "ps | grep apache | grep -v grep | awk '{print $1}' | xargs -I{} kill -9 {} > /dev/null",
                 failOnError: false
             }
         }
@@ -142,16 +137,16 @@ module.exports = function(grunt) {
         'instrument'
     ]);
 
-    grunt.registerTask('start_servers', [
-        'boot_server_async:rails',
-        'boot_server_async:cq',
-        'boot_server_async:selenium'
-        ]);
 
     grunt.registerTask('execution', [
         'protractor_coverage:chrome',
         'makeReport'
+    ]);    grunt.registerTask('start_servers', [
+        'boot_server_async:rails',
+        'boot_server_async:cq',
+        'boot_server_async:selenium'
     ]);
+
 
     grunt.registerTask('quit_servers', [
         'shell:rails_quit', //kill pid in terminal
